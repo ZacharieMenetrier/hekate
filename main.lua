@@ -1,9 +1,5 @@
-function love.load()
-  require "settings"
-end
-
 local parser = require "src/parser"
-local test = parser.read_chunk("chunk/test.ssv")
+local test = parser.read_chunk("chunk/test.chunk")
 local utils = require "src/utils"
 
 function love.draw()
