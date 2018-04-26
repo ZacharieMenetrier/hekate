@@ -12,6 +12,8 @@ http://sheepolution.com/learn/book/contents
 
 http://tylerneylon.com/a/learn-lua/
 
+https://www.lua.org/manual/5.3/
+
 ## Tile-based
 
 https://github.com/kikito/love-tile-tutorial
