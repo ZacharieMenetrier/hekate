@@ -6,4 +6,8 @@ function draw.draw_matrix(tilematrix,tileset,quads)
   end
 end
 
+function draw.draw_actor(act,sprite)
+  full_quad = love.graphics.newQuad(0, 0, 16, 16, sprite:getDimensions())
+  love.graphics.draw(sprite, full_quad, act.x * 16, act.y * 16)
+end
 return draw
