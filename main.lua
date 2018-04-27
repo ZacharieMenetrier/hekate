@@ -1,16 +1,17 @@
 -- All code shown here is nowhere to be taken seriously.
 -- Most for demonstration purposes, will be heavily extended at best.
 
+local utils = require "src/utils"
 local world = require "src/world"
 local resource = require "src/resource"
-local matrix = require "src/matrix"
 local graphics = require "src/graphics"
 -- A random system
 local move = require "src/system/move"
 
 
 -- Read a world folder and get its tilemap and cluster.
-local tilemap, cluster = world.read_world("test")
+local save = utils.read_table("data/save")
+local tilemap, cluster = world.read_world(save.world)
 
 -- Just update some random system.
 local run = 0

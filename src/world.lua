@@ -10,10 +10,9 @@ function world.read_world(name)
   -- Read the tilemap.
   local tilemap_path = "data/world/" .. name .. "/tilemap"
   local tilemap = matrix.str_to_matrix(utils.read_file(tilemap_path))
-  local cluster_path = "data/world/" .. name .. "/cluster"
   -- Read the cluster.
-  local str_cluster = utils.read_file(cluster_path)
-  local cluster = loadstring("return {" .. str_cluster .. "}")()
+  local cluster_path = "data/world/" .. name .. "/cluster"
+  local cluster = utils.read_table(cluster_path)
   return tilemap, cluster
 end
 
