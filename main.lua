@@ -1,40 +1,33 @@
+-- All code shown here is nowhere to be taken seriously.
+-- Most for demonstration purposes, will be heavily extended at best.
+
+local world = require "src/world"
+local resource = require "src/resource"
 local matrix = require "src/matrix"
-local quads = require "src/quads"
-local loader = require "src/loader"
-local chunk = matrix.read_matrix("test", "chunk")
+local graphics = require "src/graphics"
+-- A random system
+local move = require "src/system/move"
 
-local draw = require "src/draw"
-local actor = require "src/actor"
 
-function love.load()
-  --tilematrix = matrix.iter_matrix(chunk) -- TODO find out why this one cannot be loaded in love.load
-  actorslist = actor.read_actors('dummy')
-  print(actorslist)
+-- Read a world folder and get its tilemap and cluster.
+local tilemap, cluster = world.read_world("test")
+
+-- Just update some random system.
+local run = 0
+function love.update(dt)
+  run = run + dt
+  -- Each second the system is updated
+  if run > 1 then
+    run = 0
+    -- Update the system
+    move.update(cluster, world.filter_cluster)
+  end
 end
 
 function love.draw()
-  -- Matrix test
-  draw.draw_matrix(chunk, loader.tileset, quads)
-  -- Actors test
-  for i = 1, #actorslist do
-    draw.draw_actor(actorslist[i],loader.sprite)
-    draw.draw_actor_name(actorslist[i])
-  end
-  love.graphics.print(love.timer.getFPS(), 10, 10)
-
-end
-
-
--- Make the actor be drawn at each update, in case they have moved
-
--- Actor motion test : make each actor move  every second
-dtotal = 0
-function love.update(dt)
-  dtotal = dtotal + dt
-  if dtotal >= 1 then
-    dtotal = dtotal - 1
-    for i = 1, #actorslist do
-      actor.move_actor(actorslist[i],1,1)
-    end
-  end
+  love.graphics.scale(2, 2)
+  -- Draw the tilemap first.
+  graphics.draw_tileset(tilemap, resource.tileset.ascii)
+  -- Draw the cluster next.
+  graphics.draw_cluster(cluster, resource, world.filter_cluster)
 end
