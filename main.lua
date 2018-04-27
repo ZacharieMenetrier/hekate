@@ -26,4 +26,19 @@ function love.draw()
   end
 
 end
+
+
+-- Make the actor be drawn at each update, in case they have moved
+
+-- Actor motion test : make each actor move  every second
+dtotal = 0
+function love.update(dt)
+  dtotal = dtotal + dt
+  if dtotal >= 1 then
+    dtotal = dtotal - 1
+    for i = 1, #actorslist do
+      actor.move_actor(actorslist[i],1,1)
+      love.draw()
+    end
+  end
 end
