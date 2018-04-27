@@ -8,6 +8,12 @@ function actor.create_actor(myname,myx,myy)
 end
 
 
+function actor.move_actor(act,dx,dy)
+  act.x = act.x + dx
+  act.y = act.y + dy
+end
+
+
 -- Read actor list
 function actor.read_actors(name, type)
   local file_path = type .. "/" .. name .. "." .. type
