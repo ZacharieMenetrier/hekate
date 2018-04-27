@@ -1,41 +1,29 @@
-utils = require "src/utils"
+local utils = require "src/utils"
+local matrix = require "src/matrix"
 
 local actor = {}
 
-function actor.create_actor(myname,myx,myy)
-  act = {name = myname, x = myx, y = myy}
-  return act
+function actor.create_actor(name, x, y)
+  local actor = {}
+  actor.name = name
+  actor.x = x
+  actor.y = y
+  return actor
 end
 
-
-function actor.move_actor(act,dx,dy)
+function actor.move_actor(act, dx, dy)
   act.x = act.x + dx
   act.y = act.y + dy
 end
 
-
 -- Read actor list
-function actor.read_actors(name, type)
-  local file_path = type .. "/" .. name .. "." .. type
-  local str_actors = utils.read_file(file_path)
-  return actor.str_to_actorslist(str_actors)
-end
-
-function actor.str_to_actorslist(str_actors)
-  local actlist = {}
-  i=1
-  for line in str_actors:gmatch("[^\n]+") do
-
-    args = {}
-    for cell in line:gmatch("%w+") do
-      table.insert(args, cell)
-    end
-
-    actlist[i] = actor.create_actor(unpack(args))
-    i = i + 1
+function actor.read_actors(name)
+  local actor_matrix = matrix.read_matrix(name, "actors")
+  local actors = {}
+  for x, y in pairs(actor_matrix) do
+    table.insert(actors, actor.create_actor(unpack(actor_matrix[x])))
   end
-  return actlist
+  return actors
 end
-
 
 return actor
