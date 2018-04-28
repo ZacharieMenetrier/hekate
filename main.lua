@@ -15,13 +15,22 @@ local tilemap, cluster = world.read_world(save.world)
 
 -- Just update some random system.
 local run = 0
+has_started = False
+
+moves_performed = {}
+
 function love.update(dt)
   run = run + dt
   -- Each second the system is updated
   if run > 1 then
-    run = 0
+    run = run-1
     -- Update the system
-    move.update(cluster, world.filter_cluster)
+
+    local dx = love.math.random(-1, 1)
+    local dy = love.math.random(-1, 1)
+    moves_performed = move.update(cluster, world.filter_cluster, dx, dy) -- Stock info about the action
+
+  has_started = True -- Say the systems have started
   end
 end
 
@@ -31,4 +40,13 @@ function love.draw()
   graphics.draw_tileset(tilemap, resource.tileset.ascii)
   -- Draw the cluster next.
   graphics.draw_cluster(cluster, resource, world.filter_cluster)
+  graphics.draw_name(cluster,world.filter_cluster,1.1)
+
+  -- Now, draw the systems if the first update has been done
+  if has_started == True then
+    for i= 1, #moves_performed do
+      move.visualize(unpack(moves_performed[i]))
+    end
+  end
+
 end
