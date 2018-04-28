@@ -1,9 +1,11 @@
 {
+  name = "dumb",
   position = { x = 10, y = 10 },
   sprite = { name = "pig" },
   move = true,
 },
 {
+  name = "dumber",
   position = { x = 10, y = 12 },
   sprite = { name = "pig" },
 },

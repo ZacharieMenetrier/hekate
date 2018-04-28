@@ -1,7 +1,7 @@
 -- All code shown here is nowhere to be taken seriously.
 -- Most for demonstration purposes, will be heavily extended at best.
 
-local utils = require "src/utils"
+local utils = require "src/utils/utils"
 local world = require "src/world"
 local resource = require "src/resource"
 local graphics = require "src/graphics"

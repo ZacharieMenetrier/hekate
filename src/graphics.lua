@@ -1,4 +1,4 @@
-local matrix = require "src/matrix"
+local matrix = require "src/utils/matrix"
 --------------------------------------------------------------------------------
 local tile_size = 16
 local total_width = 16
@@ -42,5 +42,15 @@ function graphics.draw_cluster(cluster, loader, filter)
     love.graphics.draw(sprite, position.x * tile_size, position.y * tile_size)
   end
 end
+
+-- For the entities that have names, print their names
+function graphics.draw_name(cluster,filter, delta)
+  for entity in filter(cluster, {"name","position"}) do
+    local position = entity.position
+    love.graphics.print(entity.name, position.x * tile_size, position.y * (tile_size-delta))
+  end
+end
+
+
 
 return graphics
