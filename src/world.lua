@@ -1,5 +1,5 @@
-local matrix = require "src/matrix"
-local utils = require "src/utils"
+local matrix = require "src/utils/matrix"
+local utils = require "src/utils/utils"
 
 -- Helper for world related functions.
 local world = {}
@@ -17,7 +17,7 @@ function world.read_world(name)
 end
 
 -- A local function that tells if an entity matches the given components.
-local entity_match = function(entity, components)
+local entity_contains = function(entity, components)
   for _, component in ipairs(components) do
     if not entity[component] then return false end
   end
@@ -33,7 +33,7 @@ function world.filter_cluster(cluster, components)
   local filtered= {}
   -- Filtering first.
   for _, entity in pairs(cluster) do
-    if entity_match(entity, components) then
+    if entity_contains(entity, components) then
       table.insert(filtered, entity)
     end
   end
