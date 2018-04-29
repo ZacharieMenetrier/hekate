@@ -4,33 +4,47 @@ local resource = require "src/resource"
 local world = require "src/world"
 local controller = require "src/controller"
 
-local queue = require "src/utils/queue"
+
+
+local ai = require "resource/ai"
 
 local save = utils.read_table("data/save")
 local tilemap, cluster = world.read_world(save.world)
 local turn_state = 1
 local entity = cluster[turn_state]
-local action = queue.new()
 
-queue_action = function(new_action)
-  queue.push_action_last(action, new_action)
-end
+
 
 function love.update(dt)
+
+  -- TODO Move all of this to the controller, because love.update is called at
+  -- each frame ! Here there should only be a function that calls for the controller
+  -- to update itself. This way the game can keep drawing while the controller
+  -- processes the actions.
+
+  -- If the current entity belong the to the AI, tell it that it can make a move
+  if entity.team == "computer" then
+    ai_action = ai.give_order_to_entity(entity)
+    controller.queue_action(ai_action)
+  end
+
+  ------- PROCESSING THE ACTION QUEUE ------
+  pending_action = controller.get_pending_action() -- False if there is no pending action
   -- If the action queue is not empty
-  pending_action = queue.pop_first_action(action)
   if pending_action then
     pending_action() -- Perform the action
-    pending_action = false -- No pending actions anymore
+    pending_action = nil -- Discard that particular pending action
+
+    -- Advance the turn state
     turn_state = turn_state + 1
     if not cluster[turn_state] then
       turn_state = 1
     end
+
+    -- Get the next entity
     entity = cluster[turn_state]
     assert(entity)
   end
-  --controller.update(entity, action)
-  controller.update(entity)
 
   --controller.update(entity)
   love.timer.sleep(1) -- Slow it just to visualize the steps, we'll remove that later
