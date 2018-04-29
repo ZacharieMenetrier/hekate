@@ -10,14 +10,12 @@ local turn_state = 1
 local entity = cluster[turn_state]
 local action = false
 
-
 queue_action = function(new_action)
   action = new_action
 end
 
 function love.update(dt)
   if action then
-    print("lol")
     action()
     action = false
     turn_state = turn_state + 1
@@ -37,7 +35,9 @@ end
 function love.draw()
   graphics.draw_tileset(tilemap, resource.tileset.ascii)
   for _, entity in ipairs(cluster) do
-    local behavior = resource.behavior[entity.behavior]
-    behavior.draw(entity, resource, graphics)
+    local sprite = resource.sprite[entity.sprite]
+    local xpix = entity.position.x * graphics.tile_size
+    local ypix = entity.position.y * graphics.tile_size
+    love.graphics.draw(sprite, xpix, ypix)
   end
 end
