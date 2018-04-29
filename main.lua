@@ -31,13 +31,22 @@ function love.update(dt)
   end
   --controller.update(entity, action)
   controller.update(entity)
+
+  --controller.update(entity)
+  love.timer.sleep(1) -- Slow it just to visualize the steps, we'll remove that later
 end
 
 function love.keypressed(key, scancode, isrepeat)
+  -- When a key is pressed, tell the controller that a human action is coming
+  -- TODO make this subject to the same rules as the AI.
   controller.keypressed(entity, key)
 end
 
 function love.draw()
+
+  love.graphics.print("Current initiative : "..turn_state,40,40)
+  love.graphics.print("Current unit controlled by  : "..entity.team,40,60)
+
   graphics.draw_tileset(tilemap, resource.tileset.ascii)
   for _, entity in ipairs(cluster) do
     local sprite = resource.sprite[entity.sprite]
