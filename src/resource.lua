@@ -11,6 +11,8 @@ resource.sprite.plus = love.graphics.newImage("resource/sprite/plus.png")
 
 resource.tileset.ascii = love.graphics.newImage("resource/tileset/ascii.png")
 
-resource.component.sprite = require "resource/component/sprite"
+resource.component["random"] = require "resource/component/random"
+resource.component["player"] = require "resource/component/player"
+resource.component["position"] = require "resource/component/position"
 
 return resource

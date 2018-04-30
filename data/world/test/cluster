@@ -1,2 +1,2 @@
-{ position = { x = 2, y = 2 }, sprite = "pig", team = "player"},
-{ position = { x = 5, y = 5 }, sprite = "pig", team = "computer"},
+{ position = { x = 2, y = 2 }, player = true},
+{ position = { x = 2, y = 5 }, random = true},
