@@ -12,6 +12,12 @@ function queue.push_action_last (queue, value)
   queue[last] = value
 end
 
+function queue.is_queue_not_empty(queue)
+  if queue.first > queue.last then return false
+  else return true
+  end
+end
+
 -- Return False if the queue is empty, otherwise pops and returns the element
 function queue.pop_first_action (queue)
   local first = queue.first
