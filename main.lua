@@ -6,11 +6,14 @@ local controller = require "src/controller"
 gamestate:load_gamestate()
 
 function love.update(dt)
+  -- Does the current entity have actions left ?
   local action_left = controller.get_action_left(gamestate.entity)
+  -- If not, move on to the next entity
   if action_left == 0 then
     controller.call_entity("end", gamestate.entity, gamestate, resource)
     gamestate:next_turn()
     controller.call_entity("begin", gamestate.entity, gamestate, resource)
+  -- Otherwise, tell the entity to call its "run" component
   else
     controller.call_entity("run", gamestate.entity, gamestate, resource)
   end
@@ -21,17 +24,20 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.draw()
+  -- Draw the tilemap
   graphics.draw_tileset(gamestate.tilemap, resource.tileset.ascii)
   local entity = gamestate.entity
   local xpix = entity.position.x * graphics.tile_size + graphics.tile_size / 2
   local ypix = entity.position.y * graphics.tile_size + graphics.tile_size / 2
   love.graphics.circle("fill", xpix, ypix, graphics.tile_size * 0.66)
+  -- Draw the entities
   for _, entity in ipairs(gamestate.cluster) do
     local sprite = resource.sprite["pig"]
     local xpix = entity.position.x * graphics.tile_size
     local ypix = entity.position.y * graphics.tile_size
     love.graphics.draw(sprite, xpix, ypix)
   end
+  -- Print remaining action points
   local action_left = controller.get_action_left(gamestate.entity)
   love.graphics.print(action_left, 20, 20)
 end
