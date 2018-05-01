@@ -27,4 +27,6 @@ function love.draw()
     local ypix = entity.position.y * graphics.tile_size
     love.graphics.draw(sprite, xpix, ypix)
   end
+  local action_left = controller.get_action_left(gamestate.entity)
+  love.graphics.print(action_left, 20, 20)
 end
