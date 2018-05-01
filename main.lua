@@ -23,4 +23,5 @@ end
 function love.draw()
   visualizer.draw_interface(controller)
   visualizer.draw_world(controller)
+  controller:call_cluster("draw")
 end

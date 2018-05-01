@@ -24,4 +24,8 @@ function gamestate:next_turn()
   assert(self.entity, "No more entities in the world.")
 end
 
+function gamestate:cluster_string()
+  
+end
+
 return gamestate
