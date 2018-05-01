@@ -24,8 +24,4 @@ function gamestate:next_turn()
   assert(self.entity, "No more entities in the world.")
 end
 
-function gamestate:alter(modification)
-  self.controller:call_cluster("anticipate", modification)
-end
-
 return gamestate
