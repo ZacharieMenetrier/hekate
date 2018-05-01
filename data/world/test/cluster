@@ -1,2 +1,3 @@
 { position = { x = 2, y = 2 }, player = true, action = { right = 3, left = 3 } },
+{ position = { x = 2, y = 2 }, player = true, action = { right = 2, left = 2 } },
 { position = { x = 2, y = 5 }, random = true, action = { right = 1, left = 1 } },

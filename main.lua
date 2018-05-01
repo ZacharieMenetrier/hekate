@@ -21,6 +21,10 @@ end
 
 function love.draw()
   graphics.draw_tileset(gamestate.tilemap, resource.tileset.ascii)
+  local entity = gamestate.entity
+  local xpix = entity.position.x * graphics.tile_size + graphics.tile_size / 2
+  local ypix = entity.position.y * graphics.tile_size + graphics.tile_size / 2
+  love.graphics.circle("fill", xpix, ypix, graphics.tile_size * 0.66)
   for _, entity in ipairs(gamestate.cluster) do
     local sprite = resource.sprite["pig"]
     local xpix = entity.position.x * graphics.tile_size
