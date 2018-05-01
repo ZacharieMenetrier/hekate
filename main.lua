@@ -1,5 +1,6 @@
 local graphics = require "src/graphics"
 local controller = require "src/controller"
+local visualizer = require "src/visualizer"
 
 controller:load_gamestate()
 
@@ -20,21 +21,6 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.draw()
-  -- Draw the tilemap
-  graphics.draw_tileset(controller.gamestate.tilemap, controller.resource.tileset.ascii)
-  local entity = controller.gamestate.entity
-  local xpix = entity.position.x * graphics.tile_size + graphics.tile_size / 2
-  local ypix = entity.position.y * graphics.tile_size + graphics.tile_size / 2
-  -- Draw a circle around the current entity
-  love.graphics.circle("fill", xpix, ypix, graphics.tile_size * 0.66)
-  -- Draw the entities
-  for _, entity in ipairs(controller.gamestate.cluster) do
-    local sprite = controller.resource.sprite["pig"]
-    local xpix = entity.position.x * graphics.tile_size
-    local ypix = entity.position.y * graphics.tile_size
-    love.graphics.draw(sprite, xpix, ypix)
-  end
-  -- Draw the action lefts
-  local action_left = controller:get_action_left()
-  love.graphics.print(action_left, 20, 20)
+  visualizer.draw_interface(controller)
+  visualizer.draw_world(controller)
 end
