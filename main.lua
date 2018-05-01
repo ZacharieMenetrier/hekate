@@ -8,6 +8,7 @@ gamestate:load_gamestate()
 function love.update(dt)
   local action_left = controller.get_action_left(gamestate.entity)
   if action_left == 0 then
+    controller.call_entity("end", gamestate.entity, gamestate, resource)
     gamestate:next_turn()
     controller.call_entity("begin", gamestate.entity, gamestate, resource)
   else
