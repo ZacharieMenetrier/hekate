@@ -1,2 +1,2 @@
-{ position = { x = 2, y = 2 }, player = true},
-{ position = { x = 2, y = 5 }, random = true},
+{ position = { x = 2, y = 2 }, player = true, action = 3 },
+{ position = { x = 2, y = 5 }, random = true, action = 3 },
