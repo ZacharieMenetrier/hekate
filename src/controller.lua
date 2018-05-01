@@ -15,9 +15,9 @@ end
 -- Call a given entity
 function controller:call_entity(call, entity, ...)
   for component_name, _ in pairs(entity) do
-    local component = self.resource.component[component_name]
-    if component[call] ~= nil then
-      component[call](entity, self, ...)
+    local behavior = self.resource.behavior[component_name]
+    if behavior[call] ~= nil then
+      behavior[call](entity, self, ...)
     end
   end
 end

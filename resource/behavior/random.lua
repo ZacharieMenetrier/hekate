@@ -3,8 +3,8 @@ local random = {}
 function random.run(entity, controller)
   local x = love.math.random(-1, 1)
   local y = love.math.random(-1, 1)
-  controller.resource.component.position.move(entity, controller, x, y)
-  controller.resource.component.action.take(entity)
+  controller:call_entity("move", entity, x, y)
+  controller:call_entity("take", entity)
 end
 
 function random.react(entity, controller, modification, name, params)
@@ -12,7 +12,8 @@ function random.react(entity, controller, modification, name, params)
     if entity ~= params.entity then
       local x = love.math.random(-1, 1)
       local y = love.math.random(-1, 1)
-      controller.resource.component.position.move(entity, controller, x, y)
+      controller:call_entity("move", entity, x, y)
+      controller:call_entity("take", entity)
     end
   end
 end

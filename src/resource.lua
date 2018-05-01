@@ -4,7 +4,7 @@ local resource = {}
 
 resource.sprite = {}
 resource.tileset = {}
-resource.component = {}
+resource.behavior = {}
 
 local stock_resource = function(type, aquiring)
   local resource_names = love.filesystem.getDirectoryItems("resource/" .. type)
@@ -21,6 +21,6 @@ end
 
 stock_resource("sprite", love.graphics.newImage)
 stock_resource("tileset", love.graphics.newImage)
-stock_resource("component", aquire_component)
+stock_resource("behavior", aquire_component)
 
 return resource
