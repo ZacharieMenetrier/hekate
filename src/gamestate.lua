@@ -13,6 +13,7 @@ function gamestate:load_gamestate()
   assert(self.entity, "No entities when loading the save.")
 end
 
+-- Tell the gamestate that the next entity should become its active entiry
 function gamestate:next_turn()
   self.turn_pointer = self.turn_pointer + 1
   if self.cluster[self.turn_pointer] == nil then

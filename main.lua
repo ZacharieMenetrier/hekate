@@ -6,11 +6,14 @@ local controller = require "src/controller"
 gamestate:load_gamestate()
 
 function love.update(dt)
+  -- Does the current entity have actions left ?
   local action_left = controller.get_action_left(gamestate.entity)
+  -- If not, move on to the next entity
   if action_left == 0 then
     controller.call_entity("end", gamestate.entity, gamestate, resource)
     gamestate:next_turn()
     controller.call_entity("begin", gamestate.entity, gamestate, resource)
+  -- Otherwise, tell the entity to call its "run" component
   else
     controller.call_entity("run", gamestate.entity, gamestate, resource)
   end
