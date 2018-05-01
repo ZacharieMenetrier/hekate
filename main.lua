@@ -1,32 +1,27 @@
-local utils = require "src/utils/utils"
 local graphics = require "src/graphics"
 local resource = require "src/resource"
-local world = require "src/world"
+local gamestate = require "src/gamestate"
 local controller = require "src/controller"
 
-local save = utils.read_table("data/save")
-local tilemap, cluster = world.read_world(save.world)
-
-local turn_state = 0
-terminate = true
+gamestate:load_gamestate()
 
 function love.update(dt)
-  if terminate then
-    turn_state = turn_state + 1
-    if cluster[turn_state] == nil then turn_state = 1 end
-    entity = cluster[turn_state]
-    terminate = false
-    controller.call_entity("run", entity, turn_state, cluster, tilemap, resource)
+  local action_left = controller.get_action_left(gamestate.entity)
+  if action_left == 0 then
+    gamestate:next_turn()
+    controller.call_entity("begin", gamestate.entity, gamestate, resource)
+  else
+    controller.call_entity("run", gamestate.entity, gamestate, resource)
   end
 end
 
 function love.keypressed(key, scancode, isrepeat)
-  controller.call_cluster("keypressed", cluster, turn_state, tilemap, resource, key)
+  controller.call_cluster("keypressed", gamestate, resource, key)
 end
 
 function love.draw()
-  graphics.draw_tileset(tilemap, resource.tileset.ascii)
-  for _, entity in ipairs(cluster) do
+  graphics.draw_tileset(gamestate.tilemap, resource.tileset.ascii)
+  for _, entity in ipairs(gamestate.cluster) do
     local sprite = resource.sprite["pig"]
     local xpix = entity.position.x * graphics.tile_size
     local ypix = entity.position.y * graphics.tile_size

@@ -1,20 +1,26 @@
 local controller = {}
 
-function controller.call_entity(call, entity, turn_state, cluster, tilemap, resource, ...)
+function controller.call_entity(call, entity, gamestate, resource, ...)
   for component_name, _ in pairs(entity) do
     local component = resource.component[component_name]
     if component ~= nil then
       if component[call] ~= nil then
-        component[call](entity, turn_state, cluster, tilemap, resource, ...)
+        component[call](entity, gamestate, resource, ...)
       end
     end
   end
 end
 
-function controller.call_cluster(call, cluster, turn_state, tilemap, resource, ...)
-  for _, entity in pairs(cluster) do
-    controller.call_entity(call, entity, turn_state, cluster, tilemap, resource, ...)
+function controller.call_cluster(call, gamestate, resource, ...)
+  for _, entity in pairs(gamestate.cluster) do
+    controller.call_entity(call, entity, gamestate, resource, ...)
   end
+end
+
+function controller.get_action_left(entity)
+  local action = entity.action
+  if not action then return 0 end
+  return action.left
 end
 
 return controller
