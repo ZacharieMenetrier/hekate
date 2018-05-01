@@ -23,10 +23,16 @@ for x, y in matrix.iter_square(tileset_size) do
                                        total_width, total_width)
 end
 
+-- Functions that must be called before any drawing
+-- For now, just the scaling
+function graphics.init()
+  love.graphics.scale(2, 2)
+end
+
+
 -- Draw a tilemap with a given tileset.
 -- Maybe the tilemap should be an entity too.
 function graphics.draw_tileset(tilemap, tileset)
-  love.graphics.scale(2, 2)
   for x, y, tile in matrix.iter_matrix(tilemap) do
     local xpix = tile_size * (x - 1)
     local ypix = tile_size * (y - 1)
