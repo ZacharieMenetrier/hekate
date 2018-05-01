@@ -1,9 +1,11 @@
 local world = require "src/world"
 local utils = require "src/utils/utils"
+local resource = require "src/resource"
 
 local gamestate = {}
 
-function gamestate:load_gamestate()
+function gamestate:load_gamestate(controller)
+  self.controller = controller
   local save = utils.read_table("data/save")
   local tilemap, cluster = world.read_world(save.world)
   self.tilemap = tilemap
@@ -19,6 +21,10 @@ function gamestate:next_turn()
     self.turn_pointer = 1 end
   self.entity = self.cluster[self.turn_pointer]
   assert(self.entity, "No more entities in the world.")
+end
+
+function gamestate:alter(modification)
+  self.controller:call_cluster("anticipate", modification)
 end
 
 return gamestate

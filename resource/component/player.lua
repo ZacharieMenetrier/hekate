@@ -1,22 +1,24 @@
 local player = {}
 
-function player.keypressed(entity, gamestate, resource, key)
-  if gamestate.entity ~= entity then return end
+function player.keypressed(entity, controller, key)
+  print(entity)
+  print(controller.gamestate.entity)
+  if controller.gamestate.entity ~= entity then return end
   if key == "up" then
-    resource.component.position.move(entity, 0, -1)
-    resource.component.action.take(entity)
+    controller.resource.component.position.move(entity, 0, -1)
+    controller.resource.component.action.take(entity)
   end
   if key == "down" then
-    resource.component.position.move(entity, 0, 1)
-    resource.component.action.take(entity)
+    controller.resource.component.position.move(entity, 0, 1)
+    controller.resource.component.action.take(entity)
   end
   if key == "left" then
-    resource.component.position.move(entity, -1, 0)
-    resource.component.action.take(entity)
+    controller.resource.component.position.move(entity, -1, 0)
+    controller.resource.component.action.take(entity)
   end
   if key == "right" then
-    resource.component.position.move(entity, 1, 0)
-    resource.component.action.take(entity)
+    controller.resource.component.position.move(entity, 1, 0)
+    controller.resource.component.action.take(entity)
   end
 end
 
