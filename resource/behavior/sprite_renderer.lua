@@ -13,17 +13,11 @@ local readjust = function(entity)
 end
 
 function sprite_renderer.move(entity, controller, x, y)
-  
+
 end
 
 function sprite_renderer.begin(entity, controller)
   readjust(entity)
 end
-
-function sprite_renderer.begin(entity, controller)
-  readjust(entity)
-end
-
-
 
 return sprite_renderer

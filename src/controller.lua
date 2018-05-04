@@ -14,18 +14,13 @@ end
 
 -- Call a given entity
 function controller:call_entity(call, entity, ...)
+  -- Make the call effective
   for component_name, _ in pairs(entity) do
     local behavior = self.resource.behavior[component_name]
     if behavior[call] ~= nil then
       behavior[call](entity, self, ...)
     end
   end
-end
-
-function controller:alter_gamestate(modification, name, params)
-  self:call_cluster("anticipate", modification, name, params)
-  modification(params)
-  self:call_cluster("react", modification, name, params)
 end
 
 function controller:call_current(call, ...)
@@ -39,11 +34,15 @@ function controller:call_cluster(call, ...)
   end
 end
 
--- Does this entity have any actions left ?
+-- Return the number of actions lefft to the current entity
 function controller:get_action_left()
   local action = self.gamestate.entity.action
   if not action then return 0 end
   return action.left
+end
+
+function controller:get_tile_at(x, y)
+  return self.gamestate.tilemap[x + 1][y + 1]
 end
 
 return controller

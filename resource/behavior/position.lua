@@ -1,14 +1,11 @@
 local position = {}
 
 function position.move(entity, controller, x, y)
-
-  modification = function(params)
-    params.entity.position.x = params.entity.position.x + params.x
-    params.entity.position.y = params.entity.position.y + params.y
+  if controller:get_tile_at(entity.position.x + x, entity.position.y + y) == 1 then
+    return
   end
-
-  params = { entity = entity, x = x, y = y}
-  controller:alter_gamestate(modification, "move", params)
+  entity.position.x = entity.position.x + x
+  entity.position.y = entity.position.y + y
 end
 
 return position
