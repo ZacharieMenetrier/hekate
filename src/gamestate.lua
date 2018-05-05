@@ -4,6 +4,7 @@ local resource = require "src/resource"
 
 local gamestate = {}
 
+-- Load the gamestate given by the save file.
 function gamestate:load_gamestate(controller)
   self.controller = controller
   local save = utils.read_table("data/save")
@@ -15,17 +16,18 @@ function gamestate:load_gamestate(controller)
   assert(self.entity, "No entities when loading the save.")
 end
 
--- Tell the gamestate that the next entity should become its active entiry
+-- Return the tile at some position.
+function gamestate:get_tile_at(x, y)
+  return self.tilemap[x + 1][y + 1]
+end
+
+-- Change the turn of the entities.
 function gamestate:next_turn()
   self.turn_pointer = self.turn_pointer + 1
   if self.cluster[self.turn_pointer] == nil then
     self.turn_pointer = 1 end
   self.entity = self.cluster[self.turn_pointer]
   assert(self.entity, "No more entities in the world.")
-end
-
-function gamestate:cluster_string()
-  
 end
 
 return gamestate

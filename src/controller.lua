@@ -16,9 +16,9 @@ end
 function controller:call_entity(call, entity, ...)
   -- Make the call effective
   for component_name, _ in pairs(entity) do
-    local behavior = self.resource.behavior[component_name]
-    if behavior[call] ~= nil then
-      behavior[call](entity, self, ...)
+    local snippet = self.resource.snippet[component_name]
+    if snippet ~= nil and snippet[call] ~= nil then
+      snippet[call](entity, self, ...)
     end
   end
 end
@@ -39,10 +39,6 @@ function controller:get_action_left()
   local action = self.gamestate.entity.action
   if not action then return 0 end
   return action.left
-end
-
-function controller:get_tile_at(x, y)
-  return self.gamestate.tilemap[x + 1][y + 1]
 end
 
 return controller

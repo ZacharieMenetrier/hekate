@@ -1,13 +1,13 @@
-local random = {}
+local Random = {}
 
-function random.run(entity, controller)
+function Random.run(entity, controller)
   local x = love.math.random(-1, 1)
   local y = love.math.random(-1, 1)
   controller:call_entity("move", entity, x, y)
   controller:call_entity("remove_action", entity)
 end
 
-function random.react(entity, controller, modification, name, params)
+function Random.react(entity, controller, modification, name, params)
   if name == "move" then
     if entity ~= params.entity then
       local x = love.math.random(-1, 1)
@@ -18,4 +18,4 @@ function random.react(entity, controller, modification, name, params)
   end
 end
 
-return random
+return Random

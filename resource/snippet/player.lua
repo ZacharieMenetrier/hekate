@@ -1,6 +1,6 @@
-local player = {}
+local Player = {}
 
-function player.keypressed(entity, controller, key)
+function Player.keypressed(entity, controller, key)
   if controller.gamestate.entity ~= entity then return end
   local x = 0
   local y = 0
@@ -22,4 +22,4 @@ function player.keypressed(entity, controller, key)
   end
 end
 
-return player
+return Player
