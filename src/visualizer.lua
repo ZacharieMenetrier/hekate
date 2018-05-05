@@ -40,13 +40,13 @@ function visualizer.draw_world(controller)
   -- Draw the tilemap
   graphics.draw_tileset(controller.gamestate.tilemap, controller.resource.tileset.ascii)
 
-  -- -- Draw the entities
-  -- for _, entity in ipairs(controller.gamestate.cluster) do
-  --   local sprite = controller.resource.sprite["pig"]
-  --   local xpix = entity.position.x * graphics.tile_size
-  --   local ypix = entity.position.y * graphics.tile_size
-  --   love.graphics.draw(sprite, xpix, ypix)
-  -- end
+  -- Draw the entities
+  for _, entity in ipairs(controller.gamestate.cluster) do
+    local sprite = controller.resource.sprite["pig"]
+    local xpix = entity.position.x * graphics.tile_size
+    local ypix = entity.position.y * graphics.tile_size
+    love.graphics.draw(sprite, xpix, ypix)
+  end
 end
 
 
