@@ -2,6 +2,7 @@ local Player = {}
 
 function Player.keypressed(entity, controller, key)
   if controller.gamestate.entity ~= entity then return end
+  if controller:is_blocked() then return end
   local x = 0
   local y = 0
   if key == "up" then y = - 1 end

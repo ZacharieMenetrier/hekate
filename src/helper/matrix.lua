@@ -14,7 +14,7 @@ function matrix.str_to_matrix(str_matrix)
   for line in str_matrix:gmatch("[^\n]+") do
     local c = 1
     for cell in line:gmatch("%w+") do
-      set_value(mtx, l, c, cell)
+      set_value(mtx, c, l, cell)
       c = c + 1
     end
     l = l + 1

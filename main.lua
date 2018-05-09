@@ -3,6 +3,7 @@ local controller = require "src/controller"
 
 function love.load(arg)
   controller:load_gamestate()
+  controller:call_cluster("load")
 end
 
 function love.update(dt)

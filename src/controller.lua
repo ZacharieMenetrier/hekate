@@ -1,7 +1,8 @@
 local utils = require "src/helper/utils"
 
 local controller = {gamestate = require "src/gamestate",
-                    resource = require "src/resource"}
+                    resource = require "src/resource",
+                    block = 0}
 
 function controller:load_gamestate()
   self.gamestate:load_gamestate()
@@ -33,6 +34,18 @@ function controller:call_cluster(call, ...)
   for _, entity in pairs(self.gamestate.cluster) do
     self:call_entity(call, entity, ...)
   end
+end
+
+function controller:add_block()
+ self.block = self.block + 1
+end
+
+function controller:remove_block()
+  self.block = self.block - 1
+end
+
+function controller:is_blocked()
+  return self.block > 0
 end
 
 -- Return the number of actions lefft to the current entity
