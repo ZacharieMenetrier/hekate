@@ -2,11 +2,11 @@
 
 queue = {}
 
-function queue.new ()
+function queue.new()
   return {first = 0, last = -1}
 end
 
-function queue.push_action_last (queue, value)
+function queue.push(queue, value)
   local last = queue.last + 1
   queue.last = last
   queue[last] = value
@@ -19,7 +19,7 @@ function queue.is_queue_not_empty(queue)
 end
 
 -- Return False if the queue is empty, otherwise pops and returns the element
-function queue.pop_first_action (queue)
+function queue.pop(queue)
   local first = queue.first
   if first > queue.last then
     --print("queue is empty")

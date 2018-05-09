@@ -1,10 +1,10 @@
-local matrix = require "src/utils/matrix"
-local utils = require "src/utils/utils"
+local matrix = require "src/helper/matrix"
+local utils = require "src/helper/utils"
 
-local world = {}
+local data = {}
 
--- Return a tilemap and a cluster for a given world.
-function world.read_world(name)
+-- Return a tilemap and a cluster for a given data.
+function data.read_world(name)
   -- Read the tilemap.
   local tilemap_path = "data/world/" .. name .. "/tilemap"
   local tilemap = matrix.str_to_matrix(utils.read_file(tilemap_path))
@@ -14,4 +14,4 @@ function world.read_world(name)
   return tilemap, cluster
 end
 
-return world
+return data

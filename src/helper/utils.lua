@@ -15,6 +15,8 @@ function utils.read_table(file_path)
   return table
 end
 
-
+function utils.pack(...)
+  return { n = select("#", ...), ... }
+end
 
 return utils

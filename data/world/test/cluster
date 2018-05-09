@@ -1,5 +1,35 @@
 {
-  position = { x = 2, y = 2 },
+  position = { x = 3, y = 2 },
   player = true,
   action = { right = 3, left = 3 },
+  renderer = {sprite = "pig", x = 0, y = 0, speed = 3},
+  body = "solid"
+},
+{
+  position = { x = 2, y = 3 },
+  random = true,
+  action = { right = 0, left = 0 },
+  renderer = {sprite = "pig", x = 0, y = 0, speed = 3},
+  body = "solid"
+},
+{
+  position = { x = 5, y = 2 },
+  random = true,
+  action = { right = 0, left = 0 },
+  renderer = {sprite = "pig", x = 0, y = 0, speed = 3},
+  body = "solid"
+},
+{
+  position = { x = 2, y = 6 },
+  random = true,
+  action = { right = 0, left = 0 },
+  renderer = {sprite = "pig", x = 0, y = 0, speed = 3},
+  body = "solid"
+},
+{
+  position = { x = 6, y = 2 },
+  random = true,
+  action = { right = 0, left = 0 },
+  renderer = {sprite = "pig", x = 0, y = 0, speed = 3},
+  body = "solid"
 },

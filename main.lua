@@ -1,19 +1,12 @@
 local graphics = require "src/graphics"
 local controller = require "src/controller"
-local visualizer = require "src/visualizer"
 
-controller:load_gamestate()
+function love.load(arg)
+  controller:load_gamestate()
+end
 
 function love.update(dt)
-  -- Does the current entity have actions left ?
-  local action_left = controller:get_action_left()
-  -- If not, move on to the next entity
-  if action_left == 0 then
-    controller:next_turn()
-  -- Otherwise, tell the entity to call "run" on its component.
-  else
-    controller:call_current("run")
-  end
+  controller:call_cluster("update", dt)
 end
 
 function love.keypressed(key, scancode, isrepeat)
@@ -21,7 +14,8 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.draw()
-  visualizer.draw_interface(controller)
-  visualizer.draw_world(controller)
+  love.graphics.scale(2, 2)
+  graphics.draw_tileset(controller.gamestate.tilemap, controller.resource.tileset.ascii)
+  graphics.debug(controller)
   controller:call_cluster("draw")
 end

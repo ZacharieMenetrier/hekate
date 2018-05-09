@@ -1,9 +1,10 @@
+local utils = require "src/helper/utils"
+
 local controller = {gamestate = require "src/gamestate",
                     resource = require "src/resource"}
 
-
 function controller:load_gamestate()
-  self.gamestate:load_gamestate(self)
+  self.gamestate:load_gamestate()
 end
 
 function controller:next_turn()
@@ -14,11 +15,11 @@ end
 
 -- Call a given entity
 function controller:call_entity(call, entity, ...)
-  -- Make the call effective
+  local params = utils.pack(...)
   for component_name, _ in pairs(entity) do
     local snippet = self.resource.snippet[component_name]
     if snippet ~= nil and snippet[call] ~= nil then
-      snippet[call](entity, self, ...)
+      snippet[call](entity, self, unpack(params))
     end
   end
 end
