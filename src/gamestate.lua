@@ -10,9 +10,6 @@ function gamestate:load_gamestate()
   local tilemap, cluster = world.read_world(save.world)
   self.tilemap = tilemap
   self.cluster = cluster
-  self.turn_pointer = save.turn_pointer
-  self.entity = self.cluster[self.turn_pointer]
-  assert(self.entity, "No entities when loading the save.")
 end
 
 -- Return the tile at some position.
@@ -31,15 +28,6 @@ function gamestate:is_solid_at(x, y)
     end
   end
   return false
-end
-
--- Change the turn of the entities.
-function gamestate:next_turn()
-  self.turn_pointer = self.turn_pointer + 1
-  if self.cluster[self.turn_pointer] == nil then
-    self.turn_pointer = 1 end
-  self.entity = self.cluster[self.turn_pointer]
-  assert(self.entity, "No more entities in the world.")
 end
 
 return gamestate

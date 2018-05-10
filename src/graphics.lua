@@ -23,16 +23,6 @@ for x, y in matrix.iter_square(tileset_size) do
                                        total_width, total_width)
 end
 
-function graphics.debug(controller)
-  local entity = controller.gamestate.entity
-  local xpix = entity.position.x * graphics.tile_size + graphics.tile_size / 2
-  local ypix = entity.position.y * graphics.tile_size + graphics.tile_size / 2
-  love.graphics.circle("fill", xpix, ypix, graphics.tile_size * 0.66)
-  -- Draw the action lefts
-  local action_left = controller:get_action_left()
-  love.graphics.print(action_left, 20, 20)
-end
-
 -- Draw a tilemap with a given tileset.
 -- Maybe the tilemap should be an entity too.
 function graphics.draw_tileset(tilemap, tileset)

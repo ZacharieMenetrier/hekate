@@ -5,6 +5,7 @@ local resource = {}
 resource.sprite = {}
 resource.tileset = {}
 resource.snippet = {}
+resource.call = {}
 
 local stock_resource = function(type, retrieve)
   local resource_names = love.filesystem.getDirectoryItems("resource/" .. type)

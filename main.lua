@@ -1,5 +1,6 @@
 local graphics = require "src/graphics"
 local controller = require "src/controller"
+local uuid = require "src/helper/uuid"
 
 function love.load(arg)
   controller:load_gamestate()
@@ -17,6 +18,5 @@ end
 function love.draw()
   love.graphics.scale(2, 2)
   graphics.draw_tileset(controller.gamestate.tilemap, controller.resource.tileset.ascii)
-  graphics.debug(controller)
   controller:call_cluster("draw")
 end
