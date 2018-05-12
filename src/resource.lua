@@ -36,6 +36,7 @@ end
 
 -- Automatically load all the resources folders.
 local load = function()
+  love.graphics.setDefaultFilter("nearest", "nearest")
   resources.sprite = load_type("sprite", love.graphics.newImage)
   resources.tileset = load_type("tileset", load_tileset)
   resources.component = load_type("component", load_snippet)

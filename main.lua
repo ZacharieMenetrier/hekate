@@ -1,12 +1,10 @@
 local controller = require "src/controller"
 local resource = require "src/resource"
-local camera = require "src/camera"
 local world = require "src/world"
 
 --------------------------------------------------------------------------------
 
 function love.load(arg)
-  love.graphics.setDefaultFilter("nearest", "nearest")
   resource.load()
   world.load("test")
   controller.call_world("load")
@@ -15,7 +13,6 @@ end
 --------------------------------------------------------------------------------
 
 function love.update(dt)
-  camera.update(dt)
   controller.call_world("update", dt)
 end
 
@@ -27,8 +24,14 @@ end
 
 --------------------------------------------------------------------------------
 
+function love.mousepressed(x, y, button, isTouch)
+  controller.call_world("mousepressed", x, y, button, isTouch)
+end
+
+--------------------------------------------------------------------------------
+
 function love.draw()
-  camera.draw()
   controller.call_world("early_draw")
   controller.call_world("draw")
+  controller.call_world("late_draw")
 end

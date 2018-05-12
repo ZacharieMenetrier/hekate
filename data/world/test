@@ -1,4 +1,5 @@
-luc__tilemap = { __name = "tilemap", __entity = "luc", name = "test", tileset = "terrain"},
+system__tilemap = { __name = "tilemap", __entity = "system", name = "test", tileset = "terrain"},
+system__camera = { __name = "camera", __entity = "system", name = "test", x = 0, y = 0},
 
 tom__position = { __name = "position", __entity = "tom", x = 1, y = 1 },
 tom__renderer = { __name = "renderer", __entity = "tom", sprite = "rock", speed = 5},
