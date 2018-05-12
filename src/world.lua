@@ -9,9 +9,6 @@ local utils = require "src/utils/utils"
 -- The list of components in the world.
 local components = {}
 
--- The tilemap of the world.
-local tilemap = {}
-
 -- Will make a component a prototype of its snippet.
 local prototype = function(component)
   local snippet = resource.get("component", component.__name)
@@ -66,14 +63,8 @@ end
 
 -- Use to set the world to a specific folder.
 local load = function(world_name)
-  components = utils.read_table("data/world/" .. world_name .. "/components")
-  tilemap = utils.read_table("data/world/" .. world_name .. "/tilemap")
+  components = utils.read_table("data/world/" .. world_name)
   map(prototype)
-end
-
-local draw_tilemap = function()
-  local tileset = resource.get("tileset", tilemap.tileset)
-  graphics.draw_tilemap(tilemap, tileset)
 end
 
 --------------------------------------------------------------------------------
@@ -83,5 +74,4 @@ return {load = load,
         all = all,
         any = any,
         get = get,
-        exists = exists,
-        draw_tilemap = draw_tilemap}
+        exists = exists}

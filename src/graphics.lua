@@ -1,5 +1,7 @@
 local tile_size = 32
 
+local buffer = {}
+
 -- Use to get the quads of a specific tileset.
 local get_quads = function(tileset)
   local width = tileset:getWidth()

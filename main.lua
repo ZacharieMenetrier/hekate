@@ -29,6 +29,6 @@ end
 
 function love.draw()
   camera.draw()
-  world.draw_tilemap()
+  controller.call_world("early_draw")
   controller.call_world("draw")
 end
