@@ -21,6 +21,12 @@ end
 
 --------------------------------------------------------------------------------
 
+function love.keypressed(key, scancode, isrepeat)
+  controller.call_world("keypressed", key, scancode, isrepeat)
+end
+
+--------------------------------------------------------------------------------
+
 function love.draw()
   camera.draw()
   world.draw_tilemap()

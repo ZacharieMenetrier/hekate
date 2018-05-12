@@ -1,4 +1,6 @@
-tom_position = { __name = "position", __entity = "tom", x = 1, y = 1 },
-tom_renderer = { __name = "renderer", __entity = "tom", sprite = "rock"},
-bob_position = { __name = "position", __entity = "bob", x = 3, y = 1 },
-bob_renderer = { __name = "renderer", __entity = "bob", sprite = "rock"},
+tom__position = { __name = "position", __entity = "tom", x = 1, y = 1 },
+tom__renderer = { __name = "renderer", __entity = "tom", sprite = "rock", speed = 5},
+tom__player = { __name = "player", __entity = "tom"},
+
+bob__position = { __name = "position", __entity = "bob", x = 3, y = 1 },
+bob__renderer = { __name = "renderer", __entity = "bob", sprite = "rock", speed = 5},

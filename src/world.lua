@@ -52,7 +52,7 @@ end
 local get = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
-  result = components[entity .. "_" .. component]
+  result = components[entity .. "__" .. component]
   assert(result, "No component: " .. entity  .. "_" .. component)
   return result
 end
@@ -61,7 +61,7 @@ end
 local exists = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
-  return components[entity .. "_" .. component] ~= nil
+  return components[entity .. "__" .. component] ~= nil
 end
 
 -- Use to set the world to a specific folder.
