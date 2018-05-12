@@ -1,22 +1,28 @@
-local graphics = require "src/graphics"
 local controller = require "src/controller"
-local uuid = require "src/helper/uuid"
+local resource = require "src/resource"
+local camera = require "src/camera"
+local world = require "src/world"
+
+--------------------------------------------------------------------------------
 
 function love.load(arg)
-  controller:load_gamestate()
-  controller:call_cluster("load")
+  love.graphics.setDefaultFilter("nearest", "nearest")
+  resource.load()
+  world.load("test")
+  controller.call_world("load")
 end
+
+--------------------------------------------------------------------------------
 
 function love.update(dt)
-  controller:call_cluster("update", dt)
+  camera.update(dt)
+  controller.call_world("update", dt)
 end
 
-function love.keypressed(key, scancode, isrepeat)
-  controller:call_cluster("keypressed", key)
-end
+--------------------------------------------------------------------------------
 
 function love.draw()
-  love.graphics.scale(2, 2)
-  graphics.draw_tileset(controller.gamestate.tilemap, controller.resource.tileset.ascii)
-  controller:call_cluster("draw")
+  camera.draw()
+  world.draw_tilemap()
+  controller.call_world("draw")
 end

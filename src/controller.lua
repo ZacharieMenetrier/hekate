@@ -1,33 +1,27 @@
-local utils = require "src/helper/utils"
+local world = require "src/world"
+local resource = require "src/resource"
+local utils = require "src/utils/utils"
 
-local controller = {gamestate = require "src/gamestate",
-                    resource = require "src/resource"}
+--------------------------------------------------------------------------------
+--private variables-------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-function controller:load_gamestate()
-  self.gamestate:load_gamestate()
-end
-
-function controller:get_components(id)
-  return self.gamestate.cluster[id]
-end
-
--- Call a given entity
-function controller:call_entity(call, id, ...)
-  local components = self.gamestate.cluster[id]
-  for component_name, component in pairs(components) do
-    local snippet = self.resource.snippet[component_name]
-    if snippet ~= nil and snippet[call] ~= nil then
-      this = { id = id, components = components }
-      snippet[call](this, self, ...)
-    end
+local do_call = function(call, ...)
+  params = utils.pack(...)
+  return function(component)
+    if component[call] == nil then return end
+    component[call](component, unpack(params))
   end
 end
 
--- Call all entites in cluster
-function controller:call_cluster(call, ...)
-  for id, _ in pairs(self.gamestate.cluster) do
-    self:call_entity(call, id, ...)
-  end
+--------------------------------------------------------------------------------
+--public variables--------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local call_world = function(call, ...)
+  assert(call, "No call specified")
+  world.map(do_call(call, ...))
 end
 
-return controller
+--------------------------------------------------------------------------------
+return {call_world = call_world}

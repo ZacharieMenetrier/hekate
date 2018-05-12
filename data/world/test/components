@@ -1,0 +1,4 @@
+tom_position = { __name = "position", __entity = "tom", x = 1, y = 1 },
+tom_renderer = { __name = "renderer", __entity = "tom", sprite = "rock"},
+bob_position = { __name = "position", __entity = "bob", x = 3, y = 1 },
+bob_renderer = { __name = "renderer", __entity = "bob", sprite = "rock"},
