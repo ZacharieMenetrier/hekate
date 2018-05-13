@@ -10,6 +10,8 @@ end
 
 -- Read a lua-like file and return its table.
 function utils.read_table(file_path)
+  local file_exists = love.filesystem.getInfo(file_path)
+  assert(file_exists, "No file found at: " .. file_path)
   local str = "return {" .. utils.read_file(file_path) .. "}"
   local table = loadstring(str)()
   return table

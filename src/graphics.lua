@@ -1,9 +1,12 @@
-local tile_size = 32
+--------------------------------------------------------------------------------
+--public variables--------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-local buffer = {}
+local tile_size = 32
 
 -- Use to get the quads of a specific tileset.
 local get_quads = function(tileset)
+  assert(tileset, "No tileset specified")
   local width = tileset:getWidth()
   local height = tileset:getHeight()
   local tile_width = width / tile_size
@@ -42,6 +45,8 @@ local draw_tilemap = function(tilemap, tileset)
   end
 end
 
+--------------------------------------------------------------------------------
+-- The singleton interface that could be accessed from everywhere
 return {tile_size = tile_size,
         get_quads = get_quads,
         draw_tilemap = draw_tilemap}

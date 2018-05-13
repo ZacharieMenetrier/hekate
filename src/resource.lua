@@ -12,13 +12,14 @@ local load_snippet = function(file_path)
   return require(string.gsub(file_path, "%..*", ""))
 end
 
+-- Short function to load a tileset with its file path
 local load_tileset = function(file_path)
   local sprite = love.graphics.newImage(file_path)
   local quads = graphics.get_quads(sprite)
   return {sprite = sprite, quads = quads}
 end
 
--- Used to load a specific type of resource folder.
+-- Use to load a specific type of resource folder.
 local load_type = function(type, load)
   local file_names = love.filesystem.getDirectoryItems("resource/" .. type)
   local resources_type = {}

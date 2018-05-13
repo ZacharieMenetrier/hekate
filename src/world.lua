@@ -19,29 +19,23 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- Use to map a function on all the components.
+-- Call and return all the results of all the components.
 local map = function(fun)
   assert(fun, "No function specified to map")
-  for _, component in pairs(components) do
-    fun(component)
-  end
-end
-
--- Return all components that matches the filter.
-local all = function(filter)
-  assert(filter, "No filter specified")
-  local filtered = {}
+  local results = {}
   for component_id, component in pairs(components) do
-    if filter(component) then filtered[component_id] = component end
+    local result = fun(component)
+    if result ~= nil then results[component_id] = result end
   end
-  return filtered
+  return results
 end
 
--- Return the first component that matches the filter.
-local any = function(filter)
-  assert(filter, "No filter specified")
-  for _, component in pairs(components) do
-    if filter(component) then return component end
+-- Return the first non-null result from the components.
+local any = function(fun)
+  assert(fun, "No function specified to map")
+  for component_id, component in pairs(components) do
+    local result = fun(component)
+    if result ~= nil then return result end
   end
 end
 
@@ -63,6 +57,7 @@ end
 
 -- Use to set the world to a specific folder.
 local load = function(world_name)
+  assert(world_name, "No world name specified")
   components = utils.read_table("data/world/" .. world_name)
   map(prototype)
 end
@@ -71,7 +66,6 @@ end
 -- The singleton interface that could be accessed from everywhere
 return {load = load,
         map = map,
-        all = all,
         any = any,
         get = get,
         exists = exists}

@@ -1,3 +1,5 @@
+local controller = require "src/controller"
+
 local Position = {}
 
 function Position:move(x, y)

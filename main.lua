@@ -13,7 +13,9 @@ end
 --------------------------------------------------------------------------------
 
 function love.update(dt)
+  controller.call_world("early_update", dt)
   controller.call_world("update", dt)
+  controller.call_world("late_update", dt)
 end
 
 --------------------------------------------------------------------------------
