@@ -1,5 +1,6 @@
 local controller = require "src/controller"
 local resource = require "src/resource"
+local graphics = require "src/graphics"
 local world = require "src/world"
 
 --------------------------------------------------------------------------------
@@ -33,7 +34,10 @@ end
 --------------------------------------------------------------------------------
 
 function love.draw()
+  love.graphics.push()
   controller.call_world("early_draw")
   controller.call_world("draw")
   controller.call_world("late_draw")
+  love.graphics.pop()
+  graphics.debug()
 end

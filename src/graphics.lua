@@ -45,8 +45,16 @@ local draw_tilemap = function(tilemap, tileset)
   end
 end
 
+local debug = function()
+  love.graphics.setColor(0, 0, 0, 0.8)
+  love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 25)
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.print(love.timer.getFPS(), 4, 4)
+end
+
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
 return {tile_size = tile_size,
         get_quads = get_quads,
-        draw_tilemap = draw_tilemap}
+        draw_tilemap = draw_tilemap,
+        debug = debug}
