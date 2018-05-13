@@ -15,6 +15,13 @@ local prototype = function(component)
   setmetatable(component, {__index = snippet})
 end
 
+-- Enclose a filter ready to take a component.
+local do_filter = function(filter)
+  return function(component)
+    if filter(component) then return component end
+  end
+end
+
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -46,6 +53,11 @@ local get = function(entity, component)
   result = components[entity .. "__" .. component]
   assert(result, "No component: " .. entity  .. "_" .. component)
   return result
+end
+
+local select = function(filter)
+  assert(filter, "No filter specified")
+  return map(do_filter(filter))
 end
 
 -- Return true if the component specified by its name and its entity exists.

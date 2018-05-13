@@ -21,7 +21,7 @@ function Renderer:update(dt)
   self.y = utils.lerp(self.y, y, dt, self.speed)
 end
 
-function Renderer:late_draw()
+function Renderer:draw_layer_1()
   local sprite = resource.get("sprite", self.sprite)
   love.graphics.draw(sprite, self.x, self.y)
 end

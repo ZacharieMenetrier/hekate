@@ -14,9 +14,7 @@ end
 --------------------------------------------------------------------------------
 
 function love.update(dt)
-  controller.call_world("early_update", dt)
   controller.call_world("update", dt)
-  controller.call_world("late_update", dt)
 end
 
 --------------------------------------------------------------------------------
@@ -35,9 +33,10 @@ end
 
 function love.draw()
   love.graphics.push()
-  controller.call_world("early_draw")
-  controller.call_world("draw")
-  controller.call_world("late_draw")
+  controller.call_world("prepare_draw")
+  controller.call_world("draw_layer_0")
+  controller.call_world("draw_layer_1")
   love.graphics.pop()
+  controller.call_world("draw_ui")
   graphics.debug()
 end

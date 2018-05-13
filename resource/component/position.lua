@@ -3,10 +3,6 @@ local graphics = require "src/graphics"
 
 local Position = {}
 
-function Position:is_at(x, y)
-  return self.x == x and self.y == y
-end
-
 function Position:to_pixel()
   local half_tile = graphics.tile_size / 2
   local x = self.x * graphics.tile_size - half_tile

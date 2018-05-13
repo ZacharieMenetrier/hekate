@@ -38,13 +38,14 @@ local draw_tilemap = function(tilemap, tileset)
       local ypix = y * tile_size
       local index = (x + y * tilemap.width) + 1
       local tile = tilemap.array[index]
-      assert(tile, "No tile described at: " .. x .. " , " .. y .. " = " .. index)
+      assert(tile, "No tile described at: " .. x .. ", " .. y .. " = " .. index)
       assert(tileset.quads[tile], "No quads for tileset: " .. tile)
       love.graphics.draw(tileset.sprite, tileset.quads[tile], xpix, ypix)
     end
   end
 end
 
+-- Debug draw some stuffs in a top bar.
 local debug = function()
   love.graphics.setColor(0, 0, 0, 0.8)
   love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 25)

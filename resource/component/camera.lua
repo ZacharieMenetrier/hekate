@@ -1,3 +1,6 @@
+local graphics = require "src/graphics"
+local utils = require "src/utils/utils"
+
 local Camera = {}
 
 function Camera:load()
@@ -22,9 +25,8 @@ function Camera:update(dt)
   self.locky = love.mouse.getY()
 end
 
-function Camera:early_draw()
+function Camera:prepare_draw()
   love.graphics.translate(-self.x, -self.y)
 end
-
 
 return Camera
