@@ -15,6 +15,16 @@ local do_call = function(call, ...)
   end
 end
 
+-- Enclose a call to an entity with its argument, ready to take a component.
+local do_call_entity = function(call, entity, ...)
+  params = utils.pack(...)
+  return function(component)
+    if component[call] == nil then return end
+    if component.__entity ~= entity then return end
+    return component[call](component, unpack(params))
+  end
+end
+
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -31,7 +41,14 @@ local call_any = function(call, ...)
   return world.any(do_call(call, ...))
 end
 
+local call_entity = function(call, entity, ...)
+  assert(call, "No call specified")
+  assert(entity, "No entity specified")
+  return world.map(do_call_entity(call, entity, ...))
+end
+
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
 return {call_world = call_world,
-        question_any = question_any}
+        call_any = call_any,
+        call_entity = call_entity}
