@@ -36,19 +36,28 @@ local call_world = function(call, ...)
 end
 
 -- Return the fisrt non-null response from all the components of the world.
-local call_any = function(call, ...)
+local call_world_any = function(call, ...)
   assert(call, "No call specified")
   return world.any(do_call(call, ...))
 end
 
+-- Call a function on all components of the entity.
 local call_entity = function(call, entity, ...)
   assert(call, "No call specified")
   assert(entity, "No entity specified")
   return world.map(do_call_entity(call, entity, ...))
 end
 
+-- Return the first non-null response from all the components of an entity.
+local call_entity_any = function(call, entity, ...)
+  assert(call, "No call specified")
+  assert(entity, "No entity specified")
+  return world.any(do_call_entity(call, entity, ...))
+end
+
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
 return {call_world = call_world,
-        call_any = call_any,
-        call_entity = call_entity}
+        call_world_any = call_world_any,
+        call_entity = call_entity,
+        call_entity_any = call_entity_any}
