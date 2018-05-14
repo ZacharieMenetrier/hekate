@@ -33,7 +33,10 @@ end
 
 function love.draw()
   love.graphics.push()
+  controller.call_world("early_draw")
+  controller.call_world("draw_tilemap")
   controller.call_world("draw")
+  controller.call_world("late_draw")
   love.graphics.pop()
   controller.call_world("draw_ui")
   graphics.debug()

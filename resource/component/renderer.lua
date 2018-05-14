@@ -21,9 +21,10 @@ function Renderer:update(dt)
   self.y = utils.lerp(self.y, y, dt, self.speed)
 end
 
-function Renderer:draw_layer_1()
+function Renderer:render()
   local sprite = resource.get("sprite", self.sprite)
-  love.graphics.draw(sprite, self.x, self.y)
+  local position = world.get(self.__entity, "position")
+  return { z = position.y, params = { sprite, self.x, self.y } }
 end
 
 return Renderer

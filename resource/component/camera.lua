@@ -1,5 +1,8 @@
+local controller = require "src/controller"
 local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
+
+--------------------------------------------------------------------------------
 
 local Camera = {}
 
@@ -25,8 +28,18 @@ function Camera:update(dt)
   self.locky = love.mouse.getY()
 end
 
-function Camera:prepare_draw()
+function Camera:early_draw()
   love.graphics.translate(-self.x, -self.y)
+end
+
+function Camera:draw()
+  local renders = controller.call_world("render")
+  local sorted = {}
+  for _, render in pairs(renders) do table.insert(sorted, render) end
+  table.sort(sorted, function(a, b) return a.z < b.z end)
+  for _, render in pairs(sorted) do
+    love.graphics.draw(unpack(render.params))
+  end
 end
 
 return Camera
