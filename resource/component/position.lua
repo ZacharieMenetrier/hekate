@@ -1,6 +1,8 @@
 local controller = require "src/controller"
 local graphics = require "src/graphics"
 
+--------------------------------------------------------------------------------
+
 local Position = {}
 
 function Position:to_pixel()

@@ -1,5 +1,7 @@
 local world = require "src/world"
 
+--------------------------------------------------------------------------------
+
 local Player = {}
 
 function Player:keypressed(key)
