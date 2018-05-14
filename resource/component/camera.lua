@@ -3,6 +3,22 @@ local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
 
 --------------------------------------------------------------------------------
+--private variables-------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+local draw_depth = function()
+  local renders = controller.call_world("render")
+  local sorted = {}
+  for _, render in pairs(renders) do table.insert(sorted, render) end
+  table.sort(sorted, function(a, b) return a.z < b.z end)
+  for _, render in pairs(sorted) do
+    love.graphics.draw(unpack(render.params))
+  end
+end
+
+--------------------------------------------------------------------------------
+--public variables--------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 local Camera = {}
 
@@ -33,19 +49,11 @@ function Camera:wheelmoved(x, y)
   self.scale = self.scale + y * 0.1
 end
 
-function Camera:early_draw()
+function Camera:draw()
   love.graphics.scale(self.scale, self.scale)
   love.graphics.translate(-self.x, -self.y)
-end
-
-function Camera:draw()
-  local renders = controller.call_world("render")
-  local sorted = {}
-  for _, render in pairs(renders) do table.insert(sorted, render) end
-  table.sort(sorted, function(a, b) return a.z < b.z end)
-  for _, render in pairs(sorted) do
-    love.graphics.draw(unpack(render.params))
-  end
+  controller.call_world("draw_tilemap")
+  draw_depth()
 end
 
 return Camera
