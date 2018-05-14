@@ -25,7 +25,6 @@ local Camera = {}
 function Camera:load()
   self.lockx = 0
   self.locky = 0
-  self.scale = 1
   self.drag = false
 end
 
@@ -45,12 +44,7 @@ function Camera:update(dt)
   self.locky = love.mouse.getY()
 end
 
-function Camera:wheelmoved(x, y)
-  self.scale = self.scale + y * 0.1
-end
-
 function Camera:draw()
-  love.graphics.scale(self.scale, self.scale)
   love.graphics.translate(-self.x, -self.y)
   controller.call_world("draw_tilemap")
   draw_depth()
