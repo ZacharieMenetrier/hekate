@@ -31,6 +31,10 @@ end
 
 --------------------------------------------------------------------------------
 
+function love.wheelmoved(x, y)
+  controller.call_world("wheelmoved", x, y)
+end
+
 function love.draw()
   love.graphics.push()
   controller.call_world("early_draw")
