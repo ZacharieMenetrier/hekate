@@ -55,6 +55,7 @@ local get = function(entity, component)
   return result
 end
 
+-- Return all the components that match the filter.
 local select = function(filter)
   assert(filter, "No filter specified")
   return map(do_filter(filter))
@@ -76,8 +77,9 @@ end
 
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
-return {load = load,
-        map = map,
+return {map = map,
         any = any,
         get = get,
-        exists = exists}
+        select = select,
+        exists = exists,
+        load = load}

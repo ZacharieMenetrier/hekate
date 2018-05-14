@@ -33,9 +33,7 @@ end
 
 function love.draw()
   love.graphics.push()
-  controller.call_world("prepare_draw")
-  controller.call_world("draw_layer_0")
-  controller.call_world("draw_layer_1")
+  controller.call_world("draw")
   love.graphics.pop()
   controller.call_world("draw_ui")
   graphics.debug()
