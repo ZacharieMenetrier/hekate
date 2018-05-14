@@ -24,7 +24,7 @@ end
 function Renderer:render()
   local sprite = resource.get("sprite", self.sprite)
   local position = world.get(self.__entity, "position")
-  return { z = position.y, params = { sprite, self.x, self.y } }
+  return { z = position.y, x = self.x, y = self.y, sprite = sprite }
 end
 
 return Renderer

@@ -12,7 +12,9 @@ local draw_depth = function()
   for _, render in pairs(renders) do table.insert(sorted, render) end
   table.sort(sorted, function(a, b) return a.z < b.z end)
   for _, render in pairs(sorted) do
-    love.graphics.draw(unpack(render.params))
+    local sprite = render.sprite
+    local yoffset = sprite:getHeight() / 2
+    love.graphics.draw(sprite, render.x, render.y - yoffset)
   end
 end
 
