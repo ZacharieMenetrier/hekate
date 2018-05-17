@@ -1,0 +1,88 @@
+.TH "/home/cheneby/love/hekate/src/controller.lua" 3 "Thu May 17 2018" "Hekate" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/cheneby/love/hekate/src/controller.lua \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "local \fButils\fP = require 'src/utils/utils'"
+.br
+.ti -1c
+.RI "local \fBresource\fP = require 'src/resource'"
+.br
+.ti -1c
+.RI "local \fBworld\fP = require 'src/world'"
+.br
+.ti -1c
+.RI "local \fBdo_call\fP = function(call, \&.\&.\&.)"
+.br
+.RI "\fIEnclose a call with its argument, ready to take a component\&. \fP"
+.ti -1c
+.RI "local \fBdo_call_entity\fP = function(call, entity, \&.\&.\&.)"
+.br
+.RI "\fIEnclose a call to an entity with its argument, ready to take a component\&. \fP"
+.ti -1c
+.RI "local \fBcall_world\fP = function(call, \&.\&.\&.)"
+.br
+.RI "\fICall a function on all components of the world\&. \fP"
+.ti -1c
+.RI "local \fBcall_world_any\fP = function(call, \&.\&.\&.)"
+.br
+.RI "\fIReturn the fisrt non-null response from all the components of the world\&. \fP"
+.ti -1c
+.RI "local \fBcall_entity\fP = function(call, entity, \&.\&.\&.)"
+.br
+.RI "\fICall a function on all components of the entity\&. \fP"
+.ti -1c
+.RI "local \fBcall_entity_any\fP = function(call, entity, \&.\&.\&.)"
+.br
+.RI "\fIReturn the first non-null response from all the components of an entity\&. \fP"
+.ti -1c
+.RI "\fBreturn\fP {\fBcall_world\fP = \fBcall_world\fP"
+.br
+.RI "\fIThe singleton interface that could be accessed from everywhere\&. \fP"
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "call_entity = function(call, entity, \&.\&.\&.)"
+
+.PP
+Call a function on all components of the entity\&. 
+.SS "call_entity_any = function(call, entity, \&.\&.\&.)"
+
+.PP
+Return the first non-null response from all the components of an entity\&. 
+.SS "local call_world = function(call, \&.\&.\&.)"
+
+.PP
+Call a function on all components of the world\&. 
+.SS "call_world_any = function(call, \&.\&.\&.)"
+
+.PP
+Return the fisrt non-null response from all the components of the world\&. 
+.SS "local do_call = function(call, \&.\&.\&.)"
+
+.PP
+Enclose a call with its argument, ready to take a component\&. 
+.SS "local do_call_entity = function(call, entity, \&.\&.\&.)"
+
+.PP
+Enclose a call to an entity with its argument, ready to take a component\&. 
+.SS "local resource = require 'src/resource'"
+
+.SS "return {\fBcall_world\fP = \fBcall_world\fP"
+
+.PP
+The singleton interface that could be accessed from everywhere\&. 
+.SS "local utils = require 'src/utils/utils'"
+
+.SS "local world = require 'src/world'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Hekate from the source code\&.

@@ -1,0 +1,122 @@
+\hypertarget{resource_8lua}{\section{/home/cheneby/love/hekate/src/resource.lua File Reference}
+\label{resource_8lua}\index{/home/cheneby/love/hekate/src/resource.\-lua@{/home/cheneby/love/hekate/src/resource.\-lua}}
+}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+local \hyperlink{resource_8lua_aae06ace8bee01f93d02dfaa4436de916}{graphics} = require \char`\"{}src/graphics\char`\"{}
+\begin{DoxyCompactList}\small\item\em Import graphics methods. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_abddd3ad0a52ff83b482ee9e6dff95744}{resources} = \{\}
+\begin{DoxyCompactList}\small\item\em The list of all resources to fetch. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_a78c7047e9396ef2b6b50b42f3f25bcda}{load\-\_\-snippet} = function(file\-\_\-path)
+\begin{DoxyCompactList}\small\item\em Short function to load a snippet with its file path. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_ad3d57591837e830db7d942539a655cd9}{load\-\_\-tileset} = function(file\-\_\-path)
+\begin{DoxyCompactList}\small\item\em Short function to load a tileset with its file path. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_a475186f64c83bc588cbfbf5b5c5803f7}{load\-\_\-type} = function(type, \hyperlink{tilemap_8lua_a03ba94f58f782ea07eb3d96c8e60c69f}{load})
+\begin{DoxyCompactList}\small\item\em Use to load a specific type of resource folder. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_aea1dc50e03db80d1e2c31e4e1e8de983}{load} = function()
+\begin{DoxyCompactList}\small\item\em Automatically load all the resources folders. \end{DoxyCompactList}\item 
+local \hyperlink{resource_8lua_a9c57eef25270a48365249a68581a1247}{get} = function(type, name)
+\begin{DoxyCompactList}\small\item\em Return a specific resource. \end{DoxyCompactList}\item 
+\hyperlink{resource_8lua_a9717e7bbecb906637e86cef6da3d83c2}{return} \{\hyperlink{tilemap_8lua_a03ba94f58f782ea07eb3d96c8e60c69f}{load} = \hyperlink{tilemap_8lua_a03ba94f58f782ea07eb3d96c8e60c69f}{load}
+\begin{DoxyCompactList}\small\item\em The singleton interface that could be accessed from everywhere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{resource_8lua_a9c57eef25270a48365249a68581a1247}{\index{resource.\-lua@{resource.\-lua}!get@{get}}
+\index{get@{get}!resource.lua@{resource.\-lua}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}get = function(type, name)}}\label{resource_8lua_a9c57eef25270a48365249a68581a1247}
+
+
+Return a specific resource. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & string\-: type of resources asked \\
+\hline
+{\em name} & string\-: name of the resource \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+table\-: key = name, value = Image 
+\end{DoxyReturn}
+\hypertarget{resource_8lua_aae06ace8bee01f93d02dfaa4436de916}{\index{resource.\-lua@{resource.\-lua}!graphics@{graphics}}
+\index{graphics@{graphics}!resource.lua@{resource.\-lua}}
+\subsubsection[{graphics}]{\setlength{\rightskip}{0pt plus 5cm}local graphics = require \char`\"{}src/graphics\char`\"{}}}\label{resource_8lua_aae06ace8bee01f93d02dfaa4436de916}
+
+
+Import graphics methods. 
+
+\hypertarget{resource_8lua_aea1dc50e03db80d1e2c31e4e1e8de983}{\index{resource.\-lua@{resource.\-lua}!load@{load}}
+\index{load@{load}!resource.lua@{resource.\-lua}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}local load = function()}}\label{resource_8lua_aea1dc50e03db80d1e2c31e4e1e8de983}
+
+
+Automatically load all the resources folders. 
+
+\hypertarget{resource_8lua_a78c7047e9396ef2b6b50b42f3f25bcda}{\index{resource.\-lua@{resource.\-lua}!load\-\_\-snippet@{load\-\_\-snippet}}
+\index{load\-\_\-snippet@{load\-\_\-snippet}!resource.lua@{resource.\-lua}}
+\subsubsection[{load\-\_\-snippet}]{\setlength{\rightskip}{0pt plus 5cm}local load\-\_\-snippet = function(file\-\_\-path)}}\label{resource_8lua_a78c7047e9396ef2b6b50b42f3f25bcda}
+
+
+Short function to load a snippet with its file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-\_\-path} & string\-: path to file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+table\-: key = name, value = code for object 
+\end{DoxyReturn}
+\hypertarget{resource_8lua_ad3d57591837e830db7d942539a655cd9}{\index{resource.\-lua@{resource.\-lua}!load\-\_\-tileset@{load\-\_\-tileset}}
+\index{load\-\_\-tileset@{load\-\_\-tileset}!resource.lua@{resource.\-lua}}
+\subsubsection[{load\-\_\-tileset}]{\setlength{\rightskip}{0pt plus 5cm}local load\-\_\-tileset = function(file\-\_\-path)}}\label{resource_8lua_ad3d57591837e830db7d942539a655cd9}
+
+
+Short function to load a tileset with its file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-\_\-path} & string\-: path to file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+table\-: key = loaded Image, value = Quad 
+\end{DoxyReturn}
+\hypertarget{resource_8lua_a475186f64c83bc588cbfbf5b5c5803f7}{\index{resource.\-lua@{resource.\-lua}!load\-\_\-type@{load\-\_\-type}}
+\index{load\-\_\-type@{load\-\_\-type}!resource.lua@{resource.\-lua}}
+\subsubsection[{load\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}local load\-\_\-type = function(type, {\bf load})}}\label{resource_8lua_a475186f64c83bc588cbfbf5b5c5803f7}
+
+
+Use to load a specific type of resource folder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & string\-: type of resources asked \\
+\hline
+{\em function} & function used to load resource into a table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+table\-: key = name, value = Image 
+\end{DoxyReturn}
+\hypertarget{resource_8lua_abddd3ad0a52ff83b482ee9e6dff95744}{\index{resource.\-lua@{resource.\-lua}!resources@{resources}}
+\index{resources@{resources}!resource.lua@{resource.\-lua}}
+\subsubsection[{resources}]{\setlength{\rightskip}{0pt plus 5cm}local resources = \{\}}}\label{resource_8lua_abddd3ad0a52ff83b482ee9e6dff95744}
+
+
+The list of all resources to fetch. 
+
+\hypertarget{resource_8lua_a9717e7bbecb906637e86cef6da3d83c2}{\index{resource.\-lua@{resource.\-lua}!return@{return}}
+\index{return@{return}!resource.lua@{resource.\-lua}}
+\subsubsection[{return}]{\setlength{\rightskip}{0pt plus 5cm}return \{{\bf load} = {\bf load}}}\label{resource_8lua_a9717e7bbecb906637e86cef6da3d83c2}
+
+
+The singleton interface that could be accessed from everywhere. 
+
+\begin{DoxyReturn}{Returns}
+load 
+
+get 
+\end{DoxyReturn}

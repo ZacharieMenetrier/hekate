@@ -1,0 +1,77 @@
+.TH "/home/cheneby/love/hekate/src/utils/matrix.lua" 3 "Thu May 17 2018" "Hekate" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/cheneby/love/hekate/src/utils/matrix.lua \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "function \fBmatrix\fP \fBstr_to_matrix\fP (str_matrix)"
+.br
+.RI "\fIParse a space separated string and return a matrix\&. \fP"
+.ti -1c
+.RI "function \fBmatrix\fP \fBiter_square\fP (size)"
+.br
+.RI "\fIIterate through a virtual squared matrix\&. \fP"
+.ti -1c
+.RI "function \fBmatrix\fP \fBiter_matrix\fP (mtx)"
+.br
+.RI "\fIIterate through a given matrix\&. \fP"
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "local \fBmatrix\fP = {}"
+.br
+.RI "\fIHelper for all kind of matrices\&. \fP"
+.ti -1c
+.RI "local \fBset_value\fP = function(mtx, l, c, value)"
+.br
+.RI "\fIA local function that sets a value in a matrix\&. \fP"
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "function \fBmatrix\fP iter_matrix (mtx)"
+
+.PP
+Iterate through a given matrix\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a line, a column and the value of the cell at each iteration\&. 
+.RE
+.PP
+
+.SS "function \fBmatrix\fP iter_square (size)"
+
+.PP
+Iterate through a virtual squared matrix\&. 
+.PP
+\fBReturns:\fP
+.RS 4
+a line and a column at each iteration\&. 
+.RE
+.PP
+
+.SS "function \fBmatrix\fP str_to_matrix (str_matrix)"
+
+.PP
+Parse a space separated string and return a matrix\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "local matrix = {}"
+
+.PP
+Helper for all kind of matrices\&. 
+.SS "local set_value = function(mtx, l, c, value)"
+
+.PP
+A local function that sets a value in a matrix\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Hekate from the source code\&.

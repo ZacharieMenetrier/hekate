@@ -1,0 +1,109 @@
+.TH "/home/cheneby/love/hekate/src/world.lua" 3 "Thu May 17 2018" "Hekate" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/cheneby/love/hekate/src/world.lua \- 
+.SH SYNOPSIS
+.br
+.PP
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "local \fBresource\fP = require 'src/resource'"
+.br
+.ti -1c
+.RI "local \fBgraphics\fP = require 'src/graphics'"
+.br
+.ti -1c
+.RI "local \fButils\fP = require 'src/utils/utils'"
+.br
+.ti -1c
+.RI "local \fBcomponents\fP = {}"
+.br
+.RI "\fIThe list of components in the world\&. \fP"
+.ti -1c
+.RI "local \fBprototype\fP = function(component)"
+.br
+.RI "\fIWill make a component a prototype of its snippet\&. \fP"
+.ti -1c
+.RI "local \fBdo_filter\fP = function(filter)"
+.br
+.ti -1c
+.RI "local \fBmap\fP = function(fun)"
+.br
+.RI "\fICall and return all the results of all the components\&. \fP"
+.ti -1c
+.RI "local \fBany\fP = function(fun)"
+.br
+.RI "\fIReturn the first non-null result from the components\&. \fP"
+.ti -1c
+.RI "local \fBget\fP = function(entity, component)"
+.br
+.RI "\fIReturn the component specified by its name and its entity\&. \fP"
+.ti -1c
+.RI "local \fBselect\fP = function(filter)"
+.br
+.RI "\fIReturn all the components that match the filter\&. \fP"
+.ti -1c
+.RI "local \fBexists\fP = function(entity, component)"
+.br
+.RI "\fIReturn true if the component specified by its name and its entity exists\&. \fP"
+.ti -1c
+.RI "local \fBload\fP = function(world_name)"
+.br
+.RI "\fIUse to set the world to a specific folder\&. \fP"
+.ti -1c
+.RI "\fBreturn\fP {\fBmap\fP = \fBmap\fP"
+.br
+.RI "\fIThe singleton interface that could be accessed from everywhere\&. \fP"
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "any = function(fun)"
+
+.PP
+Return the first non-null result from the components\&. 
+.SS "local components = {}"
+
+.PP
+The list of components in the world\&. 
+.SS "local do_filter = function(filter)"
+
+.SS "exists = function(entity, component)"
+
+.PP
+Return true if the component specified by its name and its entity exists\&. 
+.SS "get = function(entity, component)"
+
+.PP
+Return the component specified by its name and its entity\&. 
+.SS "local graphics = require 'src/graphics'"
+
+.SS "load = function(world_name)"
+
+.PP
+Use to set the world to a specific folder\&. 
+.SS "local map = function(fun)"
+
+.PP
+Call and return all the results of all the components\&. 
+.SS "local prototype = function(component)"
+
+.PP
+Will make a component a prototype of its snippet\&. 
+.SS "local resource = require 'src/resource'"
+
+.SS "return {\fBmap\fP = \fBmap\fP"
+
+.PP
+The singleton interface that could be accessed from everywhere\&. 
+.SS "select = function(filter)"
+
+.PP
+Return all the components that match the filter\&. 
+.SS "local utils = require 'src/utils/utils'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Hekate from the source code\&.

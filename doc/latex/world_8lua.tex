@@ -1,0 +1,110 @@
+\hypertarget{world_8lua}{\section{/home/cheneby/love/hekate/src/world.lua File Reference}
+\label{world_8lua}\index{/home/cheneby/love/hekate/src/world.\-lua@{/home/cheneby/love/hekate/src/world.\-lua}}
+}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+local \hyperlink{world_8lua_a24ad487107aaa56bef35825abbe9773d}{resource} = require \char`\"{}src/resource\char`\"{}
+\item 
+local \hyperlink{world_8lua_aae06ace8bee01f93d02dfaa4436de916}{graphics} = require \char`\"{}src/graphics\char`\"{}
+\item 
+local \hyperlink{world_8lua_a9b2ba82def3d3656dc370bac0a641700}{utils} = require \char`\"{}src/utils/utils\char`\"{}
+\item 
+local \hyperlink{world_8lua_af7702afefbc3cd7e488ba6bc516519d5}{components} = \{\}
+\begin{DoxyCompactList}\small\item\em The list of components in the world. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_adce4dc6841964c7ca862c109ca993b97}{prototype} = function(component)
+\begin{DoxyCompactList}\small\item\em Will make a component a prototype of its snippet. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_a1f66d7d4da3c0131a8ef373be509e1ef}{do\-\_\-filter} = function(filter)
+\item 
+local \hyperlink{world_8lua_a39ec1e5339699aba0ebc7e3bb83856e7}{map} = function(fun)
+\begin{DoxyCompactList}\small\item\em Call and return all the results of all the components. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_abd7045ad8553e16c50a967b4d48b7f6b}{any} = function(fun)
+\begin{DoxyCompactList}\small\item\em Return the first non-\/null result from the components. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_a9c57eef25270a48365249a68581a1247}{get} = function(entity, component)
+\begin{DoxyCompactList}\small\item\em Return the component specified by its name and its entity. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_ae180890d7caabe9962d544350eca4638}{select} = function(filter)
+\begin{DoxyCompactList}\small\item\em Return all the components that match the filter. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_a6ba751bf71957124ec1fb2c76724448b}{exists} = function(entity, component)
+\begin{DoxyCompactList}\small\item\em Return true if the component specified by its name and its entity exists. \end{DoxyCompactList}\item 
+local \hyperlink{world_8lua_adaadec1ef48bb32b80ea5572e7d12ca6}{load} = function(world\-\_\-name)
+\begin{DoxyCompactList}\small\item\em Use to set the world to a specific folder. \end{DoxyCompactList}\item 
+\hyperlink{world_8lua_a9717e7bbecb906637e86cef6da3d83c2}{return} \{\hyperlink{world_8lua_a39ec1e5339699aba0ebc7e3bb83856e7}{map} = \hyperlink{world_8lua_a39ec1e5339699aba0ebc7e3bb83856e7}{map}
+\begin{DoxyCompactList}\small\item\em The singleton interface that could be accessed from everywhere. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{world_8lua_abd7045ad8553e16c50a967b4d48b7f6b}{\index{world.\-lua@{world.\-lua}!any@{any}}
+\index{any@{any}!world.lua@{world.\-lua}}
+\subsubsection[{any}]{\setlength{\rightskip}{0pt plus 5cm}any = function(fun)}}\label{world_8lua_abd7045ad8553e16c50a967b4d48b7f6b}
+
+
+Return the first non-\/null result from the components. 
+
+\hypertarget{world_8lua_af7702afefbc3cd7e488ba6bc516519d5}{\index{world.\-lua@{world.\-lua}!components@{components}}
+\index{components@{components}!world.lua@{world.\-lua}}
+\subsubsection[{components}]{\setlength{\rightskip}{0pt plus 5cm}local components = \{\}}}\label{world_8lua_af7702afefbc3cd7e488ba6bc516519d5}
+
+
+The list of components in the world. 
+
+\hypertarget{world_8lua_a1f66d7d4da3c0131a8ef373be509e1ef}{\index{world.\-lua@{world.\-lua}!do\-\_\-filter@{do\-\_\-filter}}
+\index{do\-\_\-filter@{do\-\_\-filter}!world.lua@{world.\-lua}}
+\subsubsection[{do\-\_\-filter}]{\setlength{\rightskip}{0pt plus 5cm}local do\-\_\-filter = function(filter)}}\label{world_8lua_a1f66d7d4da3c0131a8ef373be509e1ef}
+\hypertarget{world_8lua_a6ba751bf71957124ec1fb2c76724448b}{\index{world.\-lua@{world.\-lua}!exists@{exists}}
+\index{exists@{exists}!world.lua@{world.\-lua}}
+\subsubsection[{exists}]{\setlength{\rightskip}{0pt plus 5cm}exists = function(entity, component)}}\label{world_8lua_a6ba751bf71957124ec1fb2c76724448b}
+
+
+Return true if the component specified by its name and its entity exists. 
+
+\hypertarget{world_8lua_a9c57eef25270a48365249a68581a1247}{\index{world.\-lua@{world.\-lua}!get@{get}}
+\index{get@{get}!world.lua@{world.\-lua}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}get = function(entity, component)}}\label{world_8lua_a9c57eef25270a48365249a68581a1247}
+
+
+Return the component specified by its name and its entity. 
+
+\hypertarget{world_8lua_aae06ace8bee01f93d02dfaa4436de916}{\index{world.\-lua@{world.\-lua}!graphics@{graphics}}
+\index{graphics@{graphics}!world.lua@{world.\-lua}}
+\subsubsection[{graphics}]{\setlength{\rightskip}{0pt plus 5cm}local graphics = require \char`\"{}src/graphics\char`\"{}}}\label{world_8lua_aae06ace8bee01f93d02dfaa4436de916}
+\hypertarget{world_8lua_adaadec1ef48bb32b80ea5572e7d12ca6}{\index{world.\-lua@{world.\-lua}!load@{load}}
+\index{load@{load}!world.lua@{world.\-lua}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}load = function(world\-\_\-name)}}\label{world_8lua_adaadec1ef48bb32b80ea5572e7d12ca6}
+
+
+Use to set the world to a specific folder. 
+
+\hypertarget{world_8lua_a39ec1e5339699aba0ebc7e3bb83856e7}{\index{world.\-lua@{world.\-lua}!map@{map}}
+\index{map@{map}!world.lua@{world.\-lua}}
+\subsubsection[{map}]{\setlength{\rightskip}{0pt plus 5cm}local map = function(fun)}}\label{world_8lua_a39ec1e5339699aba0ebc7e3bb83856e7}
+
+
+Call and return all the results of all the components. 
+
+\hypertarget{world_8lua_adce4dc6841964c7ca862c109ca993b97}{\index{world.\-lua@{world.\-lua}!prototype@{prototype}}
+\index{prototype@{prototype}!world.lua@{world.\-lua}}
+\subsubsection[{prototype}]{\setlength{\rightskip}{0pt plus 5cm}local prototype = function(component)}}\label{world_8lua_adce4dc6841964c7ca862c109ca993b97}
+
+
+Will make a component a prototype of its snippet. 
+
+\hypertarget{world_8lua_a24ad487107aaa56bef35825abbe9773d}{\index{world.\-lua@{world.\-lua}!resource@{resource}}
+\index{resource@{resource}!world.lua@{world.\-lua}}
+\subsubsection[{resource}]{\setlength{\rightskip}{0pt plus 5cm}local resource = require \char`\"{}src/resource\char`\"{}}}\label{world_8lua_a24ad487107aaa56bef35825abbe9773d}
+\hypertarget{world_8lua_a9717e7bbecb906637e86cef6da3d83c2}{\index{world.\-lua@{world.\-lua}!return@{return}}
+\index{return@{return}!world.lua@{world.\-lua}}
+\subsubsection[{return}]{\setlength{\rightskip}{0pt plus 5cm}return \{{\bf map} = {\bf map}}}\label{world_8lua_a9717e7bbecb906637e86cef6da3d83c2}
+
+
+The singleton interface that could be accessed from everywhere. 
+
+\hypertarget{world_8lua_ae180890d7caabe9962d544350eca4638}{\index{world.\-lua@{world.\-lua}!select@{select}}
+\index{select@{select}!world.lua@{world.\-lua}}
+\subsubsection[{select}]{\setlength{\rightskip}{0pt plus 5cm}select = function(filter)}}\label{world_8lua_ae180890d7caabe9962d544350eca4638}
+
+
+Return all the components that match the filter. 
+
+\hypertarget{world_8lua_a9b2ba82def3d3656dc370bac0a641700}{\index{world.\-lua@{world.\-lua}!utils@{utils}}
+\index{utils@{utils}!world.lua@{world.\-lua}}
+\subsubsection[{utils}]{\setlength{\rightskip}{0pt plus 5cm}local utils = require \char`\"{}src/utils/utils\char`\"{}}}\label{world_8lua_a9b2ba82def3d3656dc370bac0a641700}
