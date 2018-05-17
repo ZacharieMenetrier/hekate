@@ -22,31 +22,23 @@ local do_filter = function(filter)
   end
 end
 
+local map = function(fun)
+  assert(fun, "No function specified")
+  for _, component in pairs(components) do
+    fun(component)
+  end
+end
+
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- Call and return all the results of all the components.
-local map = function(fun)
-  assert(fun, "No function specified to map")
-  local results = {}
-  for component_id, component in pairs(components) do
-    local result = fun(component)
-    if result ~= nil then results[component_id] = result end
-  end
-  return results
+-- Return all the components in the world.
+local all = function()
+  return components
 end
 
--- Return the first non-null result from the components.
-local any = function(fun)
-  assert(fun, "No function specified to map")
-  for component_id, component in pairs(components) do
-    local result = fun(component)
-    if result ~= nil then return result end
-  end
-end
-
--- Return the component specified by its name and its entity
+-- Return the component specified by its name and its entity.
 local get = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
@@ -72,14 +64,13 @@ end
 local load = function(world_name)
   assert(world_name, "No world name specified")
   components = utils.read_table("data/world/" .. world_name)
-  map(prototype)
+  map(prototype, components)
 end
 
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
-return {map = map,
-        any = any,
-        get = get,
+return {get = get,
+        all = all,
         select = select,
         exists = exists,
         load = load}
