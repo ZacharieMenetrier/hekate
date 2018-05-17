@@ -6,7 +6,7 @@ local world = require "src/world"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- Enclose a call with its argument, ready to take a component.
+--! @brief Enclose a call with its argument, ready to take a component.
 local do_call = function(call, ...)
   params = utils.pack(...)
   return function(component)

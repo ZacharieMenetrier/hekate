@@ -6,10 +6,10 @@ local utils = require "src/utils/utils"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- The list of components in the world.
+--! @brief The list of components in the world.
 local components = {}
 
--- Will make a component a prototype of its snippet.
+--! @brief Will make a component a prototype of its snippet.
 local prototype = function(component)
   local snippet = resource.get("component", component.__name)
   setmetatable(component, {__index = snippet})
@@ -47,20 +47,20 @@ local get = function(entity, component)
   return result
 end
 
--- Return all the components that match the filter.
+--! @brief Return all the components that match the filter.
 local select = function(filter)
   assert(filter, "No filter specified")
   return map(do_filter(filter))
 end
 
--- Return true if the component specified by its name and its entity exists.
+--! @brief Return true if the component specified by its name and its entity exists.
 local exists = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
   return components[entity .. "__" .. component] ~= nil
 end
 
--- Use to set the world to a specific folder.
+--! @brief Use to set the world to a specific folder.
 local load = function(world_name)
   assert(world_name, "No world name specified")
   components = utils.read_table("data/world/" .. world_name)

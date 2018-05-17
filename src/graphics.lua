@@ -4,7 +4,7 @@
 
 local tile_size = 32
 
--- Use to get the quads of a specific tileset.
+--! @brief Use to get the quads of a specific tileset.
 local get_quads = function(tileset)
   assert(tileset, "No tileset specified")
   local width = tileset:getWidth()
@@ -25,7 +25,7 @@ local get_quads = function(tileset)
   return quads
 end
 
--- Use to draw a tilemap given a tileset.
+--! @brief Use to draw a tilemap given a tileset.
 local draw_tilemap = function(tilemap, tileset)
   assert(tilemap, "No tilemap specified")
   assert(tileset, "No tileset specified")
@@ -45,7 +45,7 @@ local draw_tilemap = function(tilemap, tileset)
   end
 end
 
--- Debug draw some stuffs in a top bar.
+--! @brief Debug draw some stuffs in a top bar.
 local debug = function()
   love.graphics.setColor(0, 0, 0, 0.8)
   love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 25)
@@ -54,7 +54,7 @@ local debug = function()
 end
 
 --------------------------------------------------------------------------------
--- The singleton interface that could be accessed from everywhere
+--! @brief The singleton interface that could be accessed from everywhere
 return {tile_size = tile_size,
         get_quads = get_quads,
         draw_tilemap = draw_tilemap,
