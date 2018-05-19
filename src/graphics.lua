@@ -24,7 +24,7 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local get_tileset_quad = function(tile, xq, yq, h, v, d)
+local get_tileset_quad = function(tile, xq, yq, h, v, d, seed)
   local y = tile * 2
   local x = (xq + 1) / 2
   local y = y + (yq + 1) / 2

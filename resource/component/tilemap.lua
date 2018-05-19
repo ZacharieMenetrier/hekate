@@ -17,7 +17,8 @@ local draw_quad = function(xtile, ytile, xquad, yquad, tile, tileset, tilemap)
   local h = tilemap:get_tile(xtile + xquad, ytile) == tile
   local v = tilemap:get_tile(xtile, ytile + yquad) == tile
   local d = tilemap:get_tile(xtile + xquad, ytile + yquad) == tile
-  local quad = graphics.get_tileset_quad(tile, xquad, yquad, h, v, d)
+  local seed = xtile * ytile + xquad * yquad
+  local quad = graphics.get_tileset_quad(tile, xquad, yquad, h, v, d, seed)
   love.graphics.draw(tileset, quad, xpix, ypix)
 end
 
@@ -51,14 +52,6 @@ function Tilemap:draw_tilemap()
       draw_tile(x, y, tile, tileset, self)
     end
   end
-  -- for index, tile in ipairs(self.data.array) do
-  --   index = index - 1
-  --   local x = index % self.data.width
-  --   local y = math.floor(index / self.data.height)
-  --   if camera:is_tile_visible(x, y) then
-  --     draw_tile(x, y, tile, tileset, self)
-  --   end
-  -- end
 end
 
 function Tilemap:get_save()
@@ -66,9 +59,10 @@ function Tilemap:get_save()
 end
 
 function Tilemap:get_tile(x, y)
-  if x < 0 then return nil end
-  if y < 0 then return nil end
-  if x >= self.data.width then return nil end
+  if x < 0 then return 5 end
+  if y < 0 then return 5 end
+  if x >= self.data.width then return 5 end
+  if y >= self.data.height then return 5 end
   return self.data.array[(x + y * self.data.width) + 1]
 end
 
