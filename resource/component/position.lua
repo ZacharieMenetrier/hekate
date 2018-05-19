@@ -13,9 +13,4 @@ function Position:to_pixel()
   return x, y
 end
 
-function Position:move(x, y)
-  self.x = self.x + x
-  self.y = self.y + y
-end
-
 return Position

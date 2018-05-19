@@ -9,7 +9,7 @@ function love.load(arg)
   resource.load()
   world.load("test")
   controller.call_world("load")
-  love.graphics.setNewFont("resource/font/PixelHekate.ttf",16)
+  love.graphics.setNewFont("resource/font/PixelHekate.ttf", 16)
 end
 
 --------------------------------------------------------------------------------
@@ -41,6 +41,7 @@ end
 
 function love.draw()
   love.graphics.push()
+  love.graphics.scale(2, 2)
   controller.call_world("draw")
   love.graphics.pop()
   controller.call_world("draw_ui")
