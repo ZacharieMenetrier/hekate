@@ -27,16 +27,16 @@ local do_filter = function(filter)
 end
 
 --! @brief Enclose the serialization, ready to take a component.
-local make_save = function(world_name)
+local get_save = function(world_name)
   return function(component)
-    component:serialize(world_name)
+    return component:get_save(world_name)
   end
 end
 
 --! @brief Map a function over all the components.
 local map = function(fun)
   assert(fun, "No function specified")
-  results = {}
+  local results = {}
   for component_id, component in pairs(components) do
     results[component_id] = fun(component)
   end
@@ -56,7 +56,7 @@ end
 local get = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
-  result = components[entity .. "__" .. component]
+  local result = components[entity .. "__" .. component]
   assert(result, "No component: " .. entity  .. "_" .. component)
   return result
 end
@@ -85,8 +85,12 @@ end
 --! @brief Serialize all the components into the world file.
 local serialize = function()
   assert(name ~= "", "World not loaded yet")
-  utils.write_file("data/world/" .. name, "")
-  map(make_save(name))
+  local save = map(get_save(name))
+  local serialization = ""
+  for _, elem in pairs(save) do
+    serialization = serialization .. elem .. ",\n"
+  end
+  utils.write_file("data/world/" .. name, serialization)
 end
 
 --------------------------------------------------------------------------------
