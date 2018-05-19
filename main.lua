@@ -20,6 +20,7 @@ end
 --------------------------------------------------------------------------------
 
 function love.keypressed(key, scancode, isrepeat)
+  if key == "p" then world.serialize() end
   controller.call_world("keypressed", key, scancode, isrepeat)
 end
 

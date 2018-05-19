@@ -1,9 +1,7 @@
-system__tilemap = { __name = "tilemap", __entity = "system", name = "test", tileset = "terrain"},
-system__camera = { __name = "camera", __entity = "system", name = "test", x = 0, y = 0},
-
-tom__position = { __name = "position", __entity = "tom", x = 1, y = 1 },
-tom__renderer = { __name = "renderer", __entity = "tom", sprite = "rock", speed = 5, yoffset = 10},
-tom__player = { __name = "player", __entity = "tom"},
-
-bob__position = { __name = "position", __entity = "bob", x = 3, y = 1 },
-bob__renderer = { __name = "renderer", __entity = "bob", sprite = "rock", speed = 5, yoffset = 10},
+tom__renderer = {sprite = "rock", speed = 5, yoffset = 10, __name = "renderer", __entity = "tom", },
+tom__position = { y = 9, __entity = "tom", __name = "position", x = 18,  },
+tom__player = { __name = "player", __entity = "tom",  },
+system__tilemap = {tileset = "terrain", tilemap = "test", __name = "tilemap", __entity = "system", },
+system__camera = {x = 0, y = 0, __name = "camera", __entity = "system", },
+bob__position = { y = 1, __entity = "bob", __name = "position", x = 3,  },
+bob__renderer = {sprite = "rock", speed = 5, yoffset = 10, __name = "renderer", __entity = "bob", },

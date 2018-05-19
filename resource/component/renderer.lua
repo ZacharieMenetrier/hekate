@@ -1,3 +1,4 @@
+local Component = require "resource/component/component"
 local graphics = require "src/graphics"
 local resource = require "src/resource"
 local utils = require "src/utils/utils"
@@ -5,7 +6,7 @@ local world = require "src/world"
 
 --------------------------------------------------------------------------------
 
-local Renderer = {}
+local Renderer = Component:new()
 
 function Renderer:load()
   local position = world.get(self.__entity, "position")
@@ -25,6 +26,10 @@ function Renderer:render()
   local sprite = resource.get("sprite", self.sprite)
   local position = world.get(self.__entity, "position")
   return { z = position.y, x = self.x, y = self.y, sprite = sprite, yoffset = self.yoffset }
+end
+
+function Renderer:get_save()
+  return self:get_partial_save("sprite", "speed", "yoffset")
 end
 
 return Renderer

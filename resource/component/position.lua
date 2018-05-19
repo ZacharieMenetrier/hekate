@@ -1,9 +1,10 @@
+local Component = require "resource/component/component"
 local controller = require "src/controller"
 local graphics = require "src/graphics"
 
 --------------------------------------------------------------------------------
 
-local Position = {}
+local Position = Component:new()
 
 function Position:to_pixel()
   local half_tile = graphics.tile_size / 2

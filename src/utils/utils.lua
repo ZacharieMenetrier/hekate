@@ -17,23 +17,42 @@ function utils.read_table(file_path)
   return table
 end
 
+--! @biref Write a string to a file.
+function utils.write_file(file_path, str)
+  file = io.open(file_path, "w")
+  file:write(str)
+  file:close()
+end
+
+--! @biref Append a string to a file.
+function utils.append_file(file_path, str)
+  file = io.open(file_path, "a")
+  file:write(str)
+  file:close()
+end
+
 --! @brief Pack arguments into a table.
 function utils.pack(...)
   return { n = select("#", ...), ... }
 end
 
+--! @brief Get the lerp from a to b with a delta time t and a speed s.
 function utils.lerp(a, b, t, s)
   return a - (a - b) * t * s
 end
 
-function utils.input_axe()
-  local x = 0
-  local y = 0
-  if love.keyboard.isDown("down") then y = y + 1 end
-  if love.keyboard.isDown("up") then y = y - 1 end
-  if love.keyboard.isDown("left") then x = x - 1 end
-  if love.keyboard.isDown("right") then x = x + 1 end
-  return x, y
+--! @brief Recursive function to serialize a table.
+utils.serialize = function(object)
+  value_type = type(object)
+  if value_type ~= "table" then
+    if value_type == "string" then return '"' .. object .. '"' end
+    return tostring(object)
+  end
+  s = "{ "
+  for elem_id, elem in pairs(object) do
+    s = s .. elem_id .. " = " .. utils.serialize(elem) .. ", "
+  end
+  return s .. " }"
 end
 
 return utils

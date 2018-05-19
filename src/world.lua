@@ -9,36 +9,50 @@ local utils = require "src/utils/utils"
 --! @brief The list of components in the world.
 local components = {}
 
+--! @brief The name of the current world.
+local name = ""
+
 --! @brief Will make a component a prototype of its snippet.
 local prototype = function(component)
+  print(component.__name)
   local snippet = resource.get("component", component.__name)
   setmetatable(component, {__index = snippet})
 end
 
--- Enclose a filter ready to take a component.
+--! @brief Enclose a filter, ready to take a component.
 local do_filter = function(filter)
   return function(component)
     if filter(component) then return component end
   end
 end
 
+--! @brief Enclose the serialization, ready to take a component.
+local make_save = function(world_name)
+  return function(component)
+    component:serialize(world_name)
+  end
+end
+
+--! @brief Map a function over all the components.
 local map = function(fun)
   assert(fun, "No function specified")
-  for _, component in pairs(components) do
-    fun(component)
+  results = {}
+  for component_id, component in pairs(components) do
+    results[component_id] = fun(component)
   end
+  return results
 end
 
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- Return all the components in the world.
+--! @brief Return all the components in the world.
 local all = function()
   return components
 end
 
--- Return the component specified by its name and its entity.
+--! @brief Return the component specified by its name and its entity.
 local get = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
@@ -63,8 +77,16 @@ end
 --! @brief Use to set the world to a specific folder.
 local load = function(world_name)
   assert(world_name, "No world name specified")
+  name = world_name
   components = utils.read_table("data/world/" .. world_name)
-  map(prototype, components)
+  map(prototype)
+end
+
+--! @brief Serialize all the components into the world file.
+local serialize = function()
+  assert(name ~= "", "World not loaded yet")
+  utils.write_file("data/world/" .. name, "")
+  map(make_save(name))
 end
 
 --------------------------------------------------------------------------------
@@ -73,4 +95,5 @@ return {get = get,
         all = all,
         select = select,
         exists = exists,
-        load = load}
+        load = load,
+        serialize = serialize}

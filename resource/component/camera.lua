@@ -1,3 +1,4 @@
+local Component = require "resource/component/component"
 local controller = require "src/controller"
 local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
@@ -21,7 +22,7 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-local Camera = {}
+local Camera = Component:new()
 
 function Camera:load()
   self.lockx = 0
@@ -49,6 +50,10 @@ function Camera:draw()
   love.graphics.translate(-self.x, -self.y)
   controller.call_world("draw_tilemap")
   draw_depth()
+end
+
+function Camera:get_save()
+  return self:get_partial_save("x", "y")
 end
 
 return Camera

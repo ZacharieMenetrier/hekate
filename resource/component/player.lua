@@ -1,8 +1,9 @@
+local Component = require "resource/component/component"
 local world = require "src/world"
 
 --------------------------------------------------------------------------------
 
-local Player = {}
+local Player = Component:new()
 
 function Player:keypressed(key)
   local position = world.get(self.__entity, "position")
