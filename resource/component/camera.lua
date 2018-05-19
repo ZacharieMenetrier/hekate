@@ -53,11 +53,6 @@ function Camera:tiles_visibles()
   return tiles
 end
 
-function Camera:wheelmoved(x, y)
-  if y > 0 then graphics.scale = 2 end
-  if y < 0 then graphics.scale = 1 end
-end
-
 function Camera:is_tile_visible(x, y)
   local w = love.graphics.getWidth() / graphics.scale
   local h = love.graphics.getHeight() / graphics.scale
