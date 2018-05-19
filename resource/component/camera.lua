@@ -41,8 +41,8 @@ function Camera:tiles_visibles()
   local tiles = {}
   local w = love.graphics.getWidth() / graphics.scale / graphics.tile_size
   local h = love.graphics.getHeight() / graphics.scale / graphics.tile_size
-  local xshift = math.floor(self.x / graphics.tile_size)
-  local yshift = math.floor(self.y / graphics.tile_size)
+  local xshift = math.floor(self.x / graphics.scale / graphics.tile_size)
+  local yshift = math.floor(self.y / graphics.scale / graphics.tile_size)
   for y = 0, h + 1 do
     for x = 0, w + 1 do
       local xshifted = x + xshift
@@ -76,7 +76,7 @@ function Camera:update(dt)
 end
 
 function Camera:draw()
-  love.graphics.translate(-self.x, -self.y)
+  love.graphics.translate(-self.x / graphics.scale, -self.y / graphics.scale)
   controller.call_world("draw_tilemap")
   draw_depth()
 end
