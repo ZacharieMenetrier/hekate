@@ -52,6 +52,12 @@ local all = function()
   return components
 end
 
+--! @brief Add a new component to the world.
+local add = function(component)
+  assert(component, "No component specified")
+  components[component:get_key()] = component
+end
+
 --! @brief Return the component specified by its name and its entity.
 local get = function(entity, component)
   assert(entity, "No entity specified")
@@ -96,6 +102,7 @@ end
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
 return {get = get,
+        add = add,
         all = all,
         select = select,
         exists = exists,

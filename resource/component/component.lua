@@ -27,10 +27,10 @@ end
 
 --! @brief Declare a new component.
 function Component:new()
-  local o = {}
-  setmetatable(o, self)
+  local component = {}
+  setmetatable(component, self)
   self.__index = self
-  return o
+  return component
 end
 
 return Component
