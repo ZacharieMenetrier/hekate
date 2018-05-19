@@ -15,15 +15,6 @@ local load_snippet = function(file_path)
   return require(string.gsub(file_path, "%..*", ""))
 end
 
---! @brief Short function to load a tileset with its file path.
---! @param file_path: string: path to file
---! @return table: key = loaded  Image, value = Quad
-local load_tileset = function(file_path)
-  local sprite = love.graphics.newImage(file_path)
-  local quads = graphics.get_quads(sprite)
-  return {sprite = sprite, quads = quads}
-end
-
 --! @brief Use to load a specific type of resource folder.
 --! @param type: string: type of resources asked
 --! @param function: function used to load resource into a table
@@ -47,7 +38,7 @@ end
 local load = function()
   love.graphics.setDefaultFilter("nearest", "nearest")
   resources.sprite = load_type("sprite", love.graphics.newImage)
-  resources.tileset = load_type("tileset", load_tileset)
+  resources.tileset = load_type("tileset", love.graphics.newImage)
   resources.component = load_type("component", load_snippet)
 end
 

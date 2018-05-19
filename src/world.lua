@@ -14,7 +14,6 @@ local name = ""
 
 --! @brief Will make a component a prototype of its snippet.
 local prototype = function(component)
-  print(component.__name)
   local snippet = resource.get("component", component.__name)
   setmetatable(component, {__index = snippet})
 end
