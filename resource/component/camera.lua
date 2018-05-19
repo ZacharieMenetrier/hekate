@@ -2,6 +2,7 @@ local Component = require "resource/component/component"
 local controller = require "src/controller"
 local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
+local math = require "math"
 
 --------------------------------------------------------------------------------
 --private variables-------------------------------------------------------------
@@ -34,6 +35,34 @@ function Camera:mousepressed(x, y, button)
   if button ~= 2 then return end
   self.lockx = x
   self.locky = y
+end
+
+function Camera:tiles_visibles()
+  local tiles = {}
+  local w = love.graphics.getWidth() / graphics.scale / graphics.tile_size
+  local h = love.graphics.getHeight() / graphics.scale / graphics.tile_size
+  local xshift = math.floor(self.x / graphics.tile_size)
+  local yshift = math.floor(self.y / graphics.tile_size)
+  for y = 0, h + 1 do
+    for x = 0, w + 1 do
+      local xshifted = x + xshift
+      local yshifted = y + yshift
+      table.insert(tiles, {x = xshifted, y = yshifted})
+    end
+  end
+  return tiles
+end
+
+function Camera:is_tile_visible(x, y)
+  local w = love.graphics.getWidth() / graphics.scale
+  local h = love.graphics.getHeight() / graphics.scale
+  local x1 = self.x - 32
+  local y1 = self.y - 32
+  local x2 = self.x + w
+  local y2 = self.y + h
+  local xpix = x * graphics.tile_size
+  local ypix = y * graphics.tile_size
+  return xpix > x1 and xpix < x2 and ypix > y1 and ypix < y2
 end
 
 function Camera:update(dt)

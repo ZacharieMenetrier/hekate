@@ -2,6 +2,7 @@ local Component = require "resource/component/component"
 local utils = require "src/utils/utils"
 local graphics = require "src/graphics"
 local resource = require "src/resource"
+local world = require "src/world"
 local math = require "math"
 
 --------------------------------------------------------------------------------
@@ -39,13 +40,25 @@ function Tilemap:load()
 end
 
 function Tilemap:draw_tilemap()
+  local camera = world.get("system", "camera")
   local tileset = resource.get("tileset", self.tileset)
-  for index, tile in ipairs(self.data.array) do
-    index = index - 1
-    local x = index % self.data.width
-    local y = math.floor(index / self.data.height)
-    draw_tile(x, y, tile, tileset, self)
+  local tiles = camera:tiles_visibles()
+  for _, tile in ipairs(tiles) do
+    local x = tile.x
+    local y = tile.y
+    tile = self:get_tile(x, y)
+    if tile then
+      draw_tile(x, y, tile, tileset, self)
+    end
   end
+  -- for index, tile in ipairs(self.data.array) do
+  --   index = index - 1
+  --   local x = index % self.data.width
+  --   local y = math.floor(index / self.data.height)
+  --   if camera:is_tile_visible(x, y) then
+  --     draw_tile(x, y, tile, tileset, self)
+  --   end
+  -- end
 end
 
 function Tilemap:get_save()
@@ -53,6 +66,9 @@ function Tilemap:get_save()
 end
 
 function Tilemap:get_tile(x, y)
+  if x < 0 then return nil end
+  if y < 0 then return nil end
+  if x >= self.data.width then return nil end
   return self.data.array[(x + y * self.data.width) + 1]
 end
 

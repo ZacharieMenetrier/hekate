@@ -2,6 +2,7 @@
 --private variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+local scale = 2
 local tile_size = 32
 local quads_per_tileset = 16
 local tileset_size = 256
@@ -24,7 +25,6 @@ end
 --------------------------------------------------------------------------------
 
 local get_tileset_quad = function(tile, xq, yq, h, v, d)
-  print(h, v, d)
   local y = tile * 2
   local x = (xq + 1) / 2
   local y = y + (yq + 1) / 2
@@ -39,5 +39,6 @@ end
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere.
 return {tile_size = tile_size,
+        scale = scale,
         quad_size = quad_size,
         get_tileset_quad = get_tileset_quad}
