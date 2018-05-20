@@ -18,7 +18,10 @@ local draw_quad = function(x, y, xq, yq, tile, tileset, tilemap, xpix, ypix, xi,
   -- Get the diagonal neighbour.
   local d = tilemap:get_tile(x + xq, y + yq) == tile
   -- Get the corresponding quad.
-  local quad = graphics.get_tileset_quad(tile, xi, yi, h, v, d)
+  local k1 = x * xq
+  local k2 = y * yq
+  local seed = ((((k1 + k2) * (k1 + k2 + 1)) / 2) + k2)
+  local quad = graphics.get_tileset_quad(tile, xi, yi, h, v, d, seed)
   love.graphics.draw(tileset, quad, xpix, ypix)
 end
 

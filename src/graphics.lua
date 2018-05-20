@@ -28,16 +28,32 @@ do
   end
 end
 
+-- The ratio of variation for each kind of tile.
+local tile_variation = {}
+tile_variation[3] = 0.01
+tile_variation[4] = 0
+tile_variation[5] = 0
+tile_variation[6] = 0.02
+tile_variation[7] = 0.1
+
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
 --! @brief Return a tileset quad given the tile and its neighbour.
-local get_tileset_quad = function(tile, x, y, h, v, d)
+local get_tileset_quad = function(tile, x, y, h, v, d, seed)
+  love.math.setRandomSeed(seed)
   y = y + tile * 2
   local shift = 0
   if h and v then
-    if d then shift = 4 else shift = 3 end
+    if d then
+      shift = 4
+      if love.math.random() < tile_variation[tile] then
+        shift = shift + love.math.random(1, 3)
+      end
+    else
+      shift = 3
+    end
   end
   if h and not v then shift = 2 end
   if v and not h then shift = 1 end
