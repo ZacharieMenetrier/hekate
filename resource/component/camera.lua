@@ -16,7 +16,7 @@ local draw_depth = function()
   table.sort(sorted, function(a, b) return a.z < b.z end)
   for _, render in pairs(sorted) do
     local sprite = render.sprite
-    love.graphics.draw(sprite, render.x, render.y - render.yoffset)
+    love.graphics.draw(sprite, render.x, render.y)
   end
 end
 

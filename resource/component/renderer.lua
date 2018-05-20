@@ -25,7 +25,7 @@ end
 function Renderer:render()
   local sprite = resource.get("sprite", self.sprite)
   local position = world.get(self.__entity, "position")
-  return { z = position.y, x = self.x, y = self.y, sprite = sprite, yoffset = self.yoffset }
+  return { z = position.y, x = self.x, y = self.y, sprite = sprite }
 end
 
 function Renderer:get_save()
