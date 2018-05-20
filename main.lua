@@ -21,7 +21,6 @@ end
 --------------------------------------------------------------------------------
 
 function love.keypressed(key, scancode, isrepeat)
-  if key == "p" then world.serialize() end
   controller.call_world("keypressed", key, scancode, isrepeat)
 end
 
@@ -35,6 +34,12 @@ end
 
 function love.wheelmoved(x, y)
   controller.call_world("wheelmoved", x, y)
+end
+
+--------------------------------------------------------------------------------
+
+function love.resize(w, h)
+  controller.call_world("resize", w, h)
 end
 
 --------------------------------------------------------------------------------

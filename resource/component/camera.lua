@@ -1,5 +1,6 @@
 local Component = require "resource/component/component"
 local controller = require "src/controller"
+local resource = require "src/resource"
 local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
 local math = require "math"
@@ -19,6 +20,18 @@ local draw_depth = function()
   end
 end
 
+local create_grid = function()
+  local grid = love.graphics.newSpriteBatch(resource.get("sprite", "grid"), 4096)
+  local w = love.graphics.getWidth()
+  local h = love.graphics.getHeight()
+  for x = 0, (w / graphics.scale) + graphics.tile_size, graphics.tile_size  do
+    for y = 0, (h / graphics.scale) + graphics.tile_size, graphics.tile_size do
+      grid:add(x, y)
+    end
+  end
+  return grid
+end
+
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -28,7 +41,8 @@ local Camera = Component:new()
 function Camera:load()
   self.lockx = 0
   self.locky = 0
-  self.drag = false
+  self.grid = create_grid()
+  self.alpha = 0
 end
 
 function Camera:mousepressed(x, y, button)
@@ -56,8 +70,8 @@ end
 function Camera:is_tile_visible(x, y)
   local w = love.graphics.getWidth() / graphics.scale
   local h = love.graphics.getHeight() / graphics.scale
-  local x1 = self.x - 32
-  local y1 = self.y - 32
+  local x1 = self.x - graphics.tile_size
+  local y1 = self.y - graphics.tile_size
   local x2 = self.x + w
   local y2 = self.y + h
   local xpix = x * graphics.tile_size
@@ -66,6 +80,7 @@ function Camera:is_tile_visible(x, y)
 end
 
 function Camera:update(dt)
+  if love.keyboard.isDown("g") then self.alpha = 1 else self.alpha = 0 end
   if not love.mouse.isDown(2) then return end
   local xdiff = self.lockx - love.mouse.getX()
   local ydiff = self.locky - love.mouse.getY()
@@ -75,9 +90,18 @@ function Camera:update(dt)
   self.locky = love.mouse.getY()
 end
 
+function Camera:resize()
+  self.grid = create_grid()
+end
+
 function Camera:draw()
   love.graphics.translate(-self.x / graphics.scale, -self.y / graphics.scale)
   controller.call_world("draw_tilemap")
+  local x = math.floor(self.x / graphics.scale / graphics.tile_size) * graphics.tile_size
+  local y = math.floor(self.y / graphics.scale / graphics.tile_size) * graphics.tile_size
+  love.graphics.setColor(1, 1, 1, self.alpha)
+  love.graphics.draw(self.grid, x, y)
+  love.graphics.setColor(1, 1, 1, 1)
   draw_depth()
 end
 
