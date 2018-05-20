@@ -21,6 +21,10 @@ end
 --------------------------------------------------------------------------------
 
 function love.keypressed(key, scancode, isrepeat)
+  if key == "p" then
+    local c = world.get("bob", "renderer")
+    c:destroy()
+  end
   controller.call_world("keypressed", key, scancode, isrepeat)
 end
 

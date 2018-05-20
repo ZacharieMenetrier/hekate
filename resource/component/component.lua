@@ -1,4 +1,5 @@
 local utils = require "src/utils/utils"
+local world = require "src/world"
 
 --! @brief The super class of all components.
 local Component = {}
@@ -31,6 +32,11 @@ function Component:new()
   setmetatable(component, self)
   self.__index = self
   return component
+end
+
+--! @brief Base function to destroy itself.
+function Component:destroy()
+  world.delete(self.__entity, self.__name)
 end
 
 return Component

@@ -46,15 +46,18 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief Return all the components in the world.
-local all = function()
-  return components
-end
-
 --! @brief Add a new component to the world.
 local add = function(component)
   assert(component, "No component specified")
   components[component:get_key()] = component
+end
+
+local delete = function(entity, component)
+  assert(entity, "No entity specified")
+  assert(component, "No component specified")
+  local result = components[entity .. "__" .. component]
+  assert(result, "No component: " .. entity  .. "_" .. component)
+  components[entity .. "__" .. component] = nil
 end
 
 --! @brief Return the component specified by its name and its entity.
@@ -70,6 +73,11 @@ end
 local select = function(filter)
   assert(filter, "No filter specified")
   return map(do_filter(filter))
+end
+
+--! @brief Return all the components in the world.
+local all = function()
+  return select(function(c) return true end)
 end
 
 --! @brief Return true if the component specified by its name and its entity exists.
@@ -106,4 +114,5 @@ return {get = get,
         select = select,
         exists = exists,
         load = load,
+        delete = delete,
         serialize = serialize}
