@@ -32,6 +32,7 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+--! @brief Return a tileset quad given the tile and its neighbour.
 local get_tileset_quad = function(tile, x, y, h, v, d)
   y = y + tile * 2
   local shift = 0
