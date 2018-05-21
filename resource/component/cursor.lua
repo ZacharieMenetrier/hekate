@@ -25,7 +25,7 @@ function Cursor:cursor_position()
 end
 
 function Cursor:mousepressed(x, y, button)
-  controller.call_world("tile_pressed", self.x, self.y)
+  controller.call_world("tile_pressed", self.x, self.y, button)
 end
 
 function Cursor:draw_cursor()
