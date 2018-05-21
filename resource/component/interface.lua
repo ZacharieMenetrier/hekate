@@ -18,9 +18,11 @@ function Interface:tile_pressed(x,y)
 
   -- Get the position component that has this tile
   position_on_tile = world.select(filter_pos)
-  for _,c in pairs(position_on_tile) do self.selected_entity = c.__entity end
+  if next(position_on_tile) == nil then self.selected_entity = nil end
+  for _,c in pairs(position_on_tile) do
+    self.selected_entity = c.__entity
+  end
 end
-
 
 
 
