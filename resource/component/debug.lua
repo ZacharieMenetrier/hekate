@@ -7,32 +7,44 @@ local utils = require "src/utils"
 
 local Debug = Component:new()
 
-function Debug:load()
-  self.tile = "nil"
-end
-
 function Debug:draw_ui()
-  local components = nil
+  -- Get the cursor and the tilemap of the world.
   local cursor = world.get("system", "cursor")
   local tilemap = world.get("system", "tilemap")
-  local xc, yc = cursor:cursor_position()
-  self.tile = tilemap:get_tile(xc, yc)
-  local res = controller.call_world_any("is_at_tile", xc, yc)
-  if res then
-    components = world.select(function(c) return c.__entity == res.__entity end)
-    components = world.serialize(components)
-    components = love.graphics.newText(resource.get("font", "PixelHekate") , components )
+  -- Set components to nil before drawing.
+  local components = nil
+  local x, y = cursor:cursor_position()
+  local tile = tilemap:get_tile(x, y)
+  local component = controller.call_world_any("is_at_tile", x, y)
+  if component then
+    -- Get all the components of the entity selected.
+    local filter = function(c) return c.__entity == component.__entity end
+    local components = world.select(filter)
+    -- Serialize the components.
+    str = world.serialize(components)
+    -- Get the font.
+    local font = resource.get("font", "PixelHekate")
+    -- Create a graphical text from the serialization.
+    components = love.graphics.newText(font, str)
   end
-  love.graphics.setColor(0, 0, 0, 0.7)
+  -- Set the width and the height of the background.
   local w = love.graphics.getWidth()
-  local height = 32
+  local h = 32
+  -- If there is components to draw then enlarge the height.
   if components then
-    height = components:getHeight() + 24
+    h = components:getHeight() + 24
   end
-  love.graphics.rectangle("fill", 0, 0, w, height)
+  -- Set the background color.
+  love.graphics.setColor(0, 0, 0, 0.7)
+  -- Draw the background
+  love.graphics.rectangle("fill", 0, 0, w, h)
+  -- Reset the color.
   love.graphics.setColor(1, 1, 1, 1)
+  -- Draw the fps.
   love.graphics.print(love.timer.getFPS() .. " fps", 12, 12)
-  love.graphics.print("tile : " .. self.tile, 96 + 12, 12)
+  -- Draw the tile.
+  love.graphics.print("tile : " .. tile, 96 + 12, 12)
+  -- If there is components, draw them.
   if components then
     love.graphics.draw(components, 96 * 2 + 12, 12)
   end
