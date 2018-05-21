@@ -83,7 +83,13 @@ local get = function(entity, component)
   return result
 end
 
-
+--! @brief Return the component specified by its key.
+local get_by_key = function(key)
+  assert(key, "No key specified")
+  local result = components[key]
+  assert(result, "No component: " .. key)
+  return result
+end
 
 --! @brief Return true if the component specified by its name and its entity exists.
 local exists = function(entity, component)
@@ -114,6 +120,7 @@ end
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere
 return {get = get,
+        get_by_key = get_by_key,
         add = add,
         all = all,
         select = select,

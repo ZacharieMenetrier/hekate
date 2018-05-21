@@ -55,4 +55,18 @@ utils.serialize = function(object)
   return s .. " }"
 end
 
+function utils.sort_pairs(tab, comp)
+   local sorted = {}
+   for id, elem in pairs(tab) do table.insert(sorted, {id = id, elem = elem}) end
+   table.sort(sorted, function(a, b) return comp(a.elem, b.elem) end)
+   local j = 0
+   return function()
+     j = j + 1
+     local k = sorted[j]
+     if k ~= nil then
+        return k.id, tab[k.id]
+     end
+   end
+end
+
 return utils

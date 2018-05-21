@@ -38,7 +38,7 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief Automatically load all the resources folders.
+--! @brief Automatically load all the resources folders.from
 local load = function()
   love.graphics.setDefaultFilter("nearest", "nearest")
   resources.sprite = load_type("sprite", love.graphics.newImage)

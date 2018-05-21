@@ -10,18 +10,18 @@ local math = require "math"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief Draw all the entities with their responses for render function.
-local draw_depth = function()
-  local renders = controller.call_world("render")
-  local sorted = {}
-  for _, render in pairs(renders) do table.insert(sorted, render) end
-  table.sort(sorted, function(a, b) return a.z < b.z end)
-  for _, render in pairs(sorted) do
-    local sprite = render.sprite
-    love.graphics.draw(sprite, render.x, render.y, 0, 1, 1, 1, 32)
+-- Call draw on every actor depending on its draw order.
+local draw_actors = function()
+  local orders = controller.call_world("get_draw_order")
+  local comp =  function(a, b) return a < b end
+  for component_id, _ in utils.sort_pairs(orders, comp) do
+    print(component_id, _)
+    local drawer = world.get_by_key(component_id)
+    drawer:draw_actor()
   end
 end
 
+-- Create a sprite
 local create_grid = function()
   local grid = love.graphics.newSpriteBatch(resource.get("sprite", "grid"), 4096)
   local w = love.graphics.getWidth()
@@ -110,7 +110,7 @@ function Camera:draw()
   love.graphics.setColor(1, 1, 1, self.alpha)
   love.graphics.draw(self.grid, x, y)
   love.graphics.setColor(1, 1, 1, 1)
-  draw_depth()
+  draw_actors()
 end
 
 function Camera:get_save()
