@@ -12,26 +12,15 @@ local Interface = Component:new()
 
 
 --! @brief Selecting an entity with a left click of the mouse
-function Interface:mousepressed(x, y, button)
-  if button == 1 then
+function Interface:tile_pressed(x,y)
+  print("X = " .. x .. " , Y = ".. y)
+  filter_pos = function(c) if (c.__name == "position" and c.x == x and c.y == y) then return true end end
 
-    local camera = world.get("system", "camera")
-    clicked_x_tile = math.floor((x + camera.x) / (graphics.tile_size * graphics.scale))
-    clicked_y_tile = math.floor((y + camera.y) / (graphics.tile_size * graphics.scale))
-
-
-    -- TODO Separate entity selection and tile selection, with tile selection as a default
-    print("X = " .. clicked_x_tile .. " , Y = ".. clicked_y_tile)
-    filter_pos = function(c) if (c.__name == "position" and c.x == clicked_x_tile and c.y == clicked_y_tile) then return true end end
-
-    -- Get the position component that has this tile
-    position_on_tile = world.select(filter_pos)
-    for _,c in pairs(position_on_tile) do self.selected_entity = c.__entity end
-
-    -- TODO Add a keybinding to unselect
-
-  end
+  -- Get the position component that has this tile
+  position_on_tile = world.select(filter_pos)
+  for _,c in pairs(position_on_tile) do self.selected_entity = c.__entity end
 end
+
 
 
 
