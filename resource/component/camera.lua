@@ -10,6 +10,7 @@ local math = require "math"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+--! @brief Draw all the entities with their responses for render function.
 local draw_depth = function()
   local renders = controller.call_world("render")
   local sorted = {}

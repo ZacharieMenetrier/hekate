@@ -45,6 +45,7 @@ local load = function()
   resources.tileset = load_type("tileset", love.graphics.newImage)
   resources.component = load_type("component", load_snippet)
   resources.font = load_type("font", load_font())
+  resources.ability = load_type("ability", load_snippet)
 end
 
 --! @brief Return a specific resource.
