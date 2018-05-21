@@ -7,7 +7,12 @@ local utils = require "src/utils"
 
 local Debug = Component:new()
 
+function Debug:keypressed(key)
+  if key == "tab" then self.display = not self.display end
+end
+
 function Debug:draw_ui()
+  if not self.display then return end
   -- Get the cursor and the tilemap of the world.
   local cursor = world.get("system", "cursor")
   local tilemap = world.get("system", "tilemap")
@@ -35,7 +40,7 @@ function Debug:draw_ui()
     h = components:getHeight() + 24
   end
   -- Set the background color.
-  love.graphics.setColor(0, 0, 0, 0.7)
+  love.graphics.setColor(0, 0, 0, 0.6)
   -- Draw the background
   love.graphics.rectangle("fill", 0, 0, w, h)
   -- Reset the color.
