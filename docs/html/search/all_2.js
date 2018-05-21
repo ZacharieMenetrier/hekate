@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['graphics_2elua',['graphics.lua',['../graphics_8lua.html',1,'']]]
+  ['debug_2elua',['debug.lua',['../debug_8lua.html',1,'']]]
 ];
