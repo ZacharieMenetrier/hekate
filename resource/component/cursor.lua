@@ -20,6 +20,10 @@ function Cursor:update(dt)
   self.y = y
 end
 
+function Cursor:cursor_position()
+  return self.x, self.y
+end
+
 function Cursor:mousepressed(x, y, button)
   controller.call_world("tile_pressed", self.x, self.y)
 end

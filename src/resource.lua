@@ -15,6 +15,10 @@ local load_snippet = function(file_path)
   return require(string.gsub(file_path, "%..*", ""))
 end
 
+local load_font = function()
+  return function(file_path) return love.graphics.newFont(file_path, 16) end
+end
+
 --! @brief Use to load a specific type of resource folder.
 --! @param type: string: type of resources asked
 --! @param function: function used to load resource into a table
@@ -40,6 +44,7 @@ local load = function()
   resources.sprite = load_type("sprite", love.graphics.newImage)
   resources.tileset = load_type("tileset", love.graphics.newImage)
   resources.component = load_type("component", load_snippet)
+  resources.font = load_type("font", load_font())
 end
 
 --! @brief Return a specific resource.

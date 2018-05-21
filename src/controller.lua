@@ -20,7 +20,7 @@ local any = function(fun, cluster)
   assert(fun, "No function specified to map")
   for _, component in pairs(cluster) do
     local result = fun(component)
-    if result ~= nil then return result end
+    if result then return result end
   end
 end
 
@@ -43,14 +43,16 @@ end
 local call_cluster = function(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
-  return map(do_call(call, ...), world.all())
+  assert(type(call) == "string", "The call is not a string")
+  return map(do_call(call, ...), cluster)
 end
 
 -- Return the fisrt non-null response from a cluster of components.
 local call_any = function(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
-  return any(do_call(call, ...), world.all())
+  assert(type(call) == "string", "The call is not a string")
+  return any(do_call(call, ...), cluster)
 end
 
 local call_world = function(call, ...)

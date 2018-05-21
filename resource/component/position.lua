@@ -13,4 +13,8 @@ function Position:to_pixel()
   return x, y
 end
 
+function Position:is_at_tile(x, y)
+  if self.x == x and self.y == y then return self end
+end
+
 return Position

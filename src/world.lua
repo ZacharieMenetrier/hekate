@@ -33,7 +33,7 @@ local get_save = function(world_name)
   end
 end
 
---! @brief Map a function over all the components.
+
 local map = function(fun)
   assert(fun, "No function specified")
   local results = {}
@@ -42,6 +42,19 @@ local map = function(fun)
   end
   return results
 end
+
+
+--! @brief Return all the components that match the filter.
+local select = function(filter)
+  assert(filter, "No filter specified")
+  return map(do_filter(filter))
+end
+
+--! @brief Return all the components in the world.
+local all = function()
+  return select(function(c) return true end)
+end
+
 
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
@@ -70,16 +83,7 @@ local get = function(entity, component)
   return result
 end
 
---! @brief Return all the components that match the filter.
-local select = function(filter)
-  assert(filter, "No filter specified")
-  return map(do_filter(filter))
-end
 
---! @brief Return all the components in the world.
-local all = function()
-  return select(function(c) return true end)
-end
 
 --! @brief Return true if the component specified by its name and its entity exists.
 local exists = function(entity, component)
@@ -97,14 +101,14 @@ local load = function(world_name)
 end
 
 --! @brief Serialize all the components into the world file.
-local serialize = function()
+local serialize = function(cluster)
   assert(name ~= "", "World not loaded yet")
   local save = map(get_save(name))
   local serialization = ""
-  for _, elem in pairs(save) do
-    serialization = serialization .. elem .. ",\n"
+  for _, elem in pairs(cluster) do
+    serialization = serialization .. utils.serialize(elem) .. ",\n"
   end
-  utils.write_file("data/world/" .. name, serialization)
+  return serialization
 end
 
 --------------------------------------------------------------------------------

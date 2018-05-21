@@ -54,5 +54,4 @@ function love.draw()
   controller.call_world("draw")
   love.graphics.pop()
   controller.call_world("draw_ui")
-  love.graphics.print(love.timer.getFPS())
 end
