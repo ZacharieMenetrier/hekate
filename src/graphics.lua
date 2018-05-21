@@ -1,6 +1,4 @@
 -- public
-local scale = 2
--- public
 local tile_size = 32
 -- public
 local quad_size = 16
@@ -60,7 +58,7 @@ local get_tileset_quad = function(tile, x, y, h, v, d, seed)
   return tileset_quads[x + shift * 2 + y * quads_per_tileset]
 end
 
-local pixel_to_tile = function(x, y)
+local pixel_to_tile = function(x, y, scale)
   return math.floor(x / scale / tile_size), math.floor(y / scale / tile_size)
 end
 
@@ -71,7 +69,6 @@ end
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere.
 return {tile_size = tile_size,
-        scale = scale,
         quad_size = quad_size,
         tile_to_pixel = tile_to_pixel,
         pixel_to_tile = pixel_to_tile,

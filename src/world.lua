@@ -6,66 +6,55 @@ local utils = require "src/utils/utils"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief The list of components in the world.
+--! The list of components in the world.
 local components = {}
 
---! @brief The name of the current world.
+--! The name of the current world.
 local name = ""
 
---! @brief Will make a component a prototype of its snippet.
+--! Will make a component a prototype of its snippet.
 local prototype = function(component)
   local snippet = resource.get("component", component.__name)
   assert(type(snippet) == "table", component.__name .. " is invalid")
   setmetatable(component, {__index = snippet})
 end
 
---! @brief Enclose a filter, ready to take a component.
+--! Enclose a filter, ready to take a component.
 local do_filter = function(filter)
   return function(component)
     if filter(component) then return component end
   end
 end
 
---! @brief Enclose the serialization, ready to take a component.
+--! Enclose the serialization, ready to take a component.
 local get_save = function(world_name)
   return function(component)
     return component:get_save(world_name)
   end
 end
 
-
-local map = function(fun)
-  assert(fun, "No function specified")
-  local results = {}
-  for component_id, component in pairs(components) do
-    results[component_id] = fun(component)
-  end
-  return results
-end
-
-
---! @brief Return all the components that match the filter.
-local select = function(filter)
-  assert(filter, "No filter specified")
-  return map(do_filter(filter))
-end
-
---! @brief Return all the components in the world.
-local all = function()
-  return select(function(c) return true end)
-end
-
-
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief Add a new component to the world.
+--! Return all the components that match the filter.
+local select = function(filter)
+  assert(filter, "No filter specified")
+  return utils.map(do_filter(filter), components)
+end
+
+--! Return all the components in the world.
+local all = function()
+  return select(function(c) return true end)
+end
+
+--! Add a new component to the world.
 local add = function(component)
   assert(component, "No component specified")
   components[component:get_key()] = component
 end
 
+--! Delete a component.
 local delete = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
@@ -74,7 +63,7 @@ local delete = function(entity, component)
   components[entity .. "__" .. component] = nil
 end
 
---! @brief Return the component specified by its name and its entity.
+--! Return the component specified by its name and its entity.
 local get = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
@@ -83,7 +72,7 @@ local get = function(entity, component)
   return result
 end
 
---! @brief Return the component specified by its key.
+--! Return the component specified by its key.
 local get_by_key = function(key)
   assert(key, "No key specified")
   local result = components[key]
@@ -91,28 +80,28 @@ local get_by_key = function(key)
   return result
 end
 
---! @brief Return true if the component specified by its name and its entity exists.
+--! Return true if the component specified by its name and its entity exists.
 local exists = function(entity, component)
   assert(entity, "No entity specified")
   assert(component, "No component specified")
   return components[entity .. "__" .. component] ~= nil
 end
 
---! @brief Use to set the world to a specific folder.
+--! Use to set the world to a specific folder.
 local load = function(world_name)
   assert(world_name, "No world name specified")
   name = world_name
   components = utils.read_table("data/world/" .. world_name)
-  map(prototype)
+  utils.map(prototype, components)
 end
 
---! @brief Serialize all the components into the world file.
+--! Serialize all the components into the world file.
 local serialize = function(cluster)
-  assert(name ~= "", "World not loaded yet")
-  local save = map(get_save(name))
+  assert(cluster, "No cluster specified")
+  local save = utils.map(get_save(name), cluster)
   local serialization = ""
-  for _, elem in pairs(cluster) do
-    serialization = serialization .. utils.serialize(elem) .. ",\n"
+  for _, elem in pairs(save) do
+    serialization = serialization .. elem .. ",\n"
   end
   return serialization
 end

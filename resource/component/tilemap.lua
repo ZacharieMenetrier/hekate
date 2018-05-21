@@ -51,12 +51,10 @@ end
 function Tilemap:draw_tilemap()
   local camera = world.get("system", "camera")
   local tileset = resource.get("tileset", self.tileset)
-  -- Get the position of all visible tiles.
-  local tiles = camera:tiles_visibles()
-  -- Draw only visible tiles.
-  for _, tile_position in ipairs(tiles) do
-    local tile = self:get_tile(tile_position.x, tile_position.y)
-    draw_tile(tile_position.x, tile_position.y, tile, tileset, self)
+  -- Iterate through all the visible tiles.
+  for x, y in camera:tiles_visibles() do
+    local tile = self:get_tile(x, y)
+    draw_tile(x, y, tile, tileset, self)
   end
 end
 

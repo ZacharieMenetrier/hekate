@@ -50,7 +50,6 @@ end
 
 function love.draw()
   love.graphics.push()
-  love.graphics.scale(graphics.scale, graphics.scale)
   controller.call_world("draw")
   love.graphics.pop()
   controller.call_world("draw_ui")

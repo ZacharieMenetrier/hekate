@@ -15,7 +15,7 @@ end
 function Cursor:update(dt)
   local camera = world.get("system", "camera")
   local xpix, ypix = camera:world_mouse()
-  local x, y = graphics.pixel_to_tile(xpix, ypix)
+  local x, y = graphics.pixel_to_tile(xpix, ypix, camera.scale)
   self.x = x
   self.y = y
 end

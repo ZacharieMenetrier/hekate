@@ -56,17 +56,41 @@ utils.serialize = function(object)
 end
 
 function utils.sort_pairs(tab, comp)
-   local sorted = {}
-   for id, elem in pairs(tab) do table.insert(sorted, {id = id, elem = elem}) end
-   table.sort(sorted, function(a, b) return comp(a.elem, b.elem) end)
-   local j = 0
-   return function()
-     j = j + 1
-     local k = sorted[j]
-     if k ~= nil then
-        return k.id, tab[k.id]
-     end
-   end
+  local sorted = {}
+  for id, elem in pairs(tab) do table.insert(sorted, {id = id, elem = elem}) end
+  table.sort(sorted, function(a, b) return comp(a.elem, b.elem) end)
+  local j = 0
+  return function()
+    j = j + 1
+    local k = sorted[j]
+    if k ~= nil then
+      return k.id, tab[k.id]
+    end
+  end
+end
+
+function utils.itermatrix(w, h)
+  local xi = -1
+  local yi = 0
+  return function()
+    if xi > w then
+      yi = yi +1
+      if yi > w then return nil, nil end
+      xi = -1
+    end
+    xi = xi + 1
+    return xi, yi
+  end
+end
+
+function utils.map(fun, tab)
+  assert(fun, "No function specified")
+  assert(tab, "No table specified")
+  local results = {}
+  for id, elem in pairs(tab) do
+    results[id] = fun(elem)
+  end
+  return results
 end
 
 return utils
