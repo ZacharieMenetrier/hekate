@@ -1,5 +1,5 @@
 local Component = require "resource/component/component"
-
+local resource = require "src/resource"
 --------------------------------------------------------------------------------
 
 --! @brief This component contains a list of abilities and can call them.
@@ -8,8 +8,8 @@ local Abilities = Component:new()
 --! @brief Learn an ability
 function Abilities:learn_ability(ability_name)
   -- Each ability has its own lua file matching its name
-  ability_to_learn = require ("resource/ability/" .. ability_name)
   self.abilities[ability_name] = ability_to_learn
+  ability_to_learn = resource.get("ability",ability_name)
   print("You have learned : " .. ability_name) -- Debug
 end
 
