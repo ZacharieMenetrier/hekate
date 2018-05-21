@@ -3,6 +3,7 @@ local controller = require "src/controller"
 local resource = require "src/resource"
 local graphics = require "src/graphics"
 local utils = require "src/utils/utils"
+local world = require "src/world"
 local math = require "math"
 
 --------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ local draw_depth = function()
   table.sort(sorted, function(a, b) return a.z < b.z end)
   for _, render in pairs(sorted) do
     local sprite = render.sprite
-    love.graphics.draw(sprite, render.x, render.y)
+    love.graphics.draw(sprite, render.x, render.y, 0, 1, 1, 1, 32)
   end
 end
 
@@ -43,6 +44,10 @@ function Camera:load()
   self.locky = 0
   self.grid = create_grid()
   self.alpha = 0
+end
+
+function Camera:world_mouse()
+  return self.x + love.mouse.getX(), self.y + love.mouse.getY()
 end
 
 function Camera:mousepressed(x, y, button)
@@ -97,6 +102,8 @@ end
 function Camera:draw()
   love.graphics.translate(-self.x / graphics.scale, -self.y / graphics.scale)
   controller.call_world("draw_tilemap")
+  local cursor = world.get("system", "cursor")
+  cursor:draw_cursor()
   local x = math.floor(self.x / graphics.scale / graphics.tile_size) * graphics.tile_size
   local y = math.floor(self.y / graphics.scale / graphics.tile_size) * graphics.tile_size
   love.graphics.setColor(1, 1, 1, self.alpha)

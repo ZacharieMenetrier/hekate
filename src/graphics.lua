@@ -30,11 +30,11 @@ end
 
 -- The ratio of variation for each kind of tile.
 local tile_variation = {}
-tile_variation[3] = 0.01
+tile_variation[3] = 0.005
 tile_variation[4] = 0
 tile_variation[5] = 0
-tile_variation[6] = 0.02
-tile_variation[7] = 0.1
+tile_variation[6] = 0.01
+tile_variation[7] = 0.05
 
 --------------------------------------------------------------------------------
 --public variables--------------------------------------------------------------
@@ -60,9 +60,19 @@ local get_tileset_quad = function(tile, x, y, h, v, d, seed)
   return tileset_quads[x + shift * 2 + y * quads_per_tileset]
 end
 
+local pixel_to_tile = function(x, y)
+  return math.floor(x / scale / tile_size), math.floor(y / scale / tile_size)
+end
+
+local tile_to_pixel = function(x, y)
+  return math.floor(x * tile_size), math.floor(y * tile_size)
+end
+
 --------------------------------------------------------------------------------
 -- The singleton interface that could be accessed from everywhere.
 return {tile_size = tile_size,
         scale = scale,
         quad_size = quad_size,
+        tile_to_pixel = tile_to_pixel,
+        pixel_to_tile = pixel_to_tile,
         get_tileset_quad = get_tileset_quad}

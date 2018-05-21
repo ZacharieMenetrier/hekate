@@ -15,6 +15,7 @@ local name = ""
 --! @brief Will make a component a prototype of its snippet.
 local prototype = function(component)
   local snippet = resource.get("component", component.__name)
+  assert(type(snippet) == "table", component.__name .. " is invalid")
   setmetatable(component, {__index = snippet})
 end
 
