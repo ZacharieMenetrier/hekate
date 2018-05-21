@@ -3,7 +3,7 @@ local controller = require "src/controller"
 local resource = require "src/resource"
 local graphics = require "src/graphics"
 local world = require "src/world"
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 
 local Debug = Component:new()
 

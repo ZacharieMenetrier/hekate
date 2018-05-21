@@ -1,4 +1,4 @@
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 local world = require "src/world"
 
 --! The super class of all components.

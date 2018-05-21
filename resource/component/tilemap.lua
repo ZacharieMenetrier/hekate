@@ -1,5 +1,5 @@
 local Component = require "resource/component/component"
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 local graphics = require "src/graphics"
 local resource = require "src/resource"
 local world = require "src/world"

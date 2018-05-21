@@ -1,7 +1,7 @@
 local Component = require "resource/component/component"
 local graphics = require "src/graphics"
 local resource = require "src/resource"
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 local world = require "src/world"
 
 --------------------------------------------------------------------------------

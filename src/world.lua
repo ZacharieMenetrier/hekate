@@ -1,6 +1,6 @@
 local resource = require "src/resource"
 local graphics = require "src/graphics"
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 
 --------------------------------------------------------------------------------
 --private variables-------------------------------------------------------------

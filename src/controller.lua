@@ -1,4 +1,4 @@
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 local resource = require "src/resource"
 local world = require "src/world"
 

@@ -2,7 +2,7 @@ local Component = require "resource/component/component"
 local controller = require "src/controller"
 local resource = require "src/resource"
 local graphics = require "src/graphics"
-local utils = require "src/utils/utils"
+local utils = require "src/utils"
 local world = require "src/world"
 local math = require "math"
 
