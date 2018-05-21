@@ -19,7 +19,7 @@ function Debug:draw_ui()
   if component then
     -- Get all the components of the entity selected.
     local filter = function(c) return c.__entity == component.__entity end
-    local components = world.select(filter)
+    components = world.select(filter)
     -- Serialize the components.
     str = world.serialize(components)
     -- Get the font.
