@@ -8,7 +8,7 @@ local world = require "src/world"
 
 --! @brief Enclose a call with its argument, ready to take a component.
 local do_call = function(call, ...)
-  params = utils.pack(...)
+  local params = utils.pack(...)
   return function(component)
     if component[call] == nil then return end
     return component[call](component, unpack(params))

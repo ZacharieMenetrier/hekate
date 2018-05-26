@@ -34,8 +34,6 @@ local Camera = Component:new()
 
 --! Load the camera
 function Camera:load()
-  self.lockx = 0
-  self.locky = 0
   self.grid = self:create_grid()
 end
 
@@ -49,31 +47,6 @@ function Camera:mousepressed(x, y, button)
   if button ~= 2 then return end
   self.lockx = x
   self.locky = y
-end
-
---! Return an iterator of the tile visibles in the world.
-function Camera:tiles_visibles()
-  local tiles = {}
-  -- Some self-explanatory shortcuts.
-  local ts = graphics.tile_size
-  local s = self.scale
-  local w = love.graphics.getWidth() / s / ts
-  local h = love.graphics.getHeight() / s / ts
-  -- The translation in term of tiles.
-  local x_translate = math.floor(self.x / s / ts)
-  local y_translate = math.floor(self.y / s / ts)
-  -- Get a matrix iterator with width and height.
-  local itermatrix = utils.itermatrix(w, h)
-  -- Enclose the iterator.
-  return function()
-    -- Iterate through the matrix.
-    local xi, yi = itermatrix()
-    if not xi then return end
-    -- Shift the x and y by the camera's translation.
-    local x = xi + x_translate
-    local y = yi + y_translate
-    return x, y
-  end
 end
 
 --! Update the camera.
@@ -151,6 +124,31 @@ function Camera:draw()
   self:draw_grid()
   -- Draw the actors of the world
   draw_actors()
+end
+
+--! Return an iterator of the tile visibles in the world.
+function Camera:tiles_visibles()
+  local tiles = {}
+  -- Some self-explanatory shortcuts.
+  local ts = graphics.tile_size
+  local s = self.scale
+  local w = love.graphics.getWidth() / s / ts
+  local h = love.graphics.getHeight() / s / ts
+  -- The translation in term of tiles.
+  local x_translate = math.floor(self.x / s / ts)
+  local y_translate = math.floor(self.y / s / ts)
+  -- Get a matrix iterator with width and height.
+  local itermatrix = utils.itermatrix(w, h)
+  -- Enclose the iterator.
+  return function()
+    -- Iterate through the matrix.
+    local xi, yi = itermatrix()
+    if not xi then return end
+    -- Shift the x and y by the camera's translation.
+    local x = xi + x_translate
+    local y = yi + y_translate
+    return x, y
+  end
 end
 
 --! Return the save of the camera.
