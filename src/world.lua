@@ -91,7 +91,7 @@ end
 local load = function(world_name)
   assert(world_name, "No world name specified")
   name = world_name
-  components = utils.read_table("data/world/" .. world_name)
+  components = resource.get("world", world_name)
   utils.map(prototype, components)
 end
 

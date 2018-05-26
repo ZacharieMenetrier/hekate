@@ -1,5 +1,6 @@
 --! Import graphics methods
 local graphics = require "src/graphics"
+local utils = require "src/utils"
 
 --------------------------------------------------------------------------------
 --private variables-------------------------------------------------------------
@@ -17,6 +18,10 @@ end
 
 local load_font = function()
   return function(file_path) return love.graphics.newFont(file_path, 16) end
+end
+
+local load_table = function()
+  return function(file_path) return utils.read_table(file_path) end
 end
 
 --! @brief Use to load a specific type of resource folder.
@@ -40,12 +45,20 @@ end
 
 --! @brief Automatically load all the resources folders.from
 local load = function()
+  -- Set the filter to nearest for pixelish effect.
   love.graphics.setDefaultFilter("nearest", "nearest")
+  -- Load the sprites.
   resources.sprite = load_type("sprite", love.graphics.newImage)
-  resources.tileset = load_type("tileset", love.graphics.newImage)
+  -- Load the components.
   resources.component = load_type("component", load_snippet)
-  resources.font = load_type("font", load_font())
+  -- Load the abilities.
   resources.ability = load_type("ability", load_snippet)
+  -- Load the fonts.
+  resources.font = load_type("font", load_font())
+  -- Load the worlds.
+  resources.world = load_type("world", load_table())
+  -- Load the tilemaps.
+  resources.tilemap = load_type("tilemap", load_table())
 end
 
 --! @brief Return a specific resource.

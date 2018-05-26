@@ -45,12 +45,12 @@ end
 local Tilemap = Component:new()
 
 function Tilemap:load()
-  self.data = utils.read_table("data/tilemap/" .. self.tilemap)
+  self.data = resource.get("tilemap", self.tilemap)
 end
 
 function Tilemap:draw_tilemap()
   local camera = world.get("system", "camera")
-  local tileset = resource.get("tileset", self.tileset)
+  local tileset = resource.get("sprite", self.tileset)
   -- Iterate through all the visible tiles.
   for x, y in camera:tiles_visibles() do
     local tile = self:get_tile(x, y)
