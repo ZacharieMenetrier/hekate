@@ -1,1 +1,7 @@
-data/world/personal
+resource/tilemap
+resource/world
+resource/tileset
+resource/sprite
+resource/font
+resource/text
+resource/audio
