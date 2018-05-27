@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Hekate documentation</title>
+    <link rel="stylesheet" href="../ldoc_pale.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Hekate</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/peachy.html">peachy</a></li>
+  <li><strong>utils</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lib.json.html">lib.json</a></li>
+  <li><a href="../modules/src.graphics.html">src.graphics</a></li>
+  <li><a href="../modules/src.resource.html">src.resource</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>utils</code></h1>
+<p>A parser/renderer for Aseprite animations in LÖVE.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#utils:read_file">utils:read_file (file_path)</a></td>
+	<td class="summary">Read a file and return a string.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:read_table">utils:read_table (file_path)</a></td>
+	<td class="summary">Read a lua-like file and return its table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:write_file">utils:write_file (file_path, str)</a></td>
+	<td class="summary">Write a string to a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:pack">utils:pack (...)</a></td>
+	<td class="summary">Pack arguments into a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:lerp">utils:lerp (a, b, t, s)</a></td>
+	<td class="summary">Get the lerp from a to b with a delta time t and a speed s.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:serialize">utils:serialize (object)</a></td>
+	<td class="summary">Recursive function to serialize a table.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:sort_pairs">utils:sort_pairs (tab, comp)</a></td>
+	<td class="summary">Pairs through a table sorted by a comparative function.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:itermatrix">utils:itermatrix (w, h)</a></td>
+	<td class="summary">Iterate through a x and y of a matrix with width w and height h.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:split_file_path">utils:split_file_path (file_path)</a></td>
+	<td class="summary">Returns the path, filename and extension.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#utils:map">utils:map (fun, tab)</a></td>
+	<td class="summary">Map a function to a table.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "utils:read_file"></a>
+    <strong>utils:read_file (file_path)</strong>
+    </dt>
+    <dd>
+    Read a file and return a string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file_path</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:read_table"></a>
+    <strong>utils:read_table (file_path)</strong>
+    </dt>
+    <dd>
+    Read a lua-like file and return its table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file_path</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:write_file"></a>
+    <strong>utils:write_file (file_path, str)</strong>
+    </dt>
+    <dd>
+    Write a string to a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file_path</span>
+
+
+
+        </li>
+        <li><span class="parameter">str</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:pack"></a>
+    <strong>utils:pack (...)</strong>
+    </dt>
+    <dd>
+    Pack arguments into a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:lerp"></a>
+    <strong>utils:lerp (a, b, t, s)</strong>
+    </dt>
+    <dd>
+    Get the lerp from a to b with a delta time t and a speed s.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">a</span>
+
+
+
+        </li>
+        <li><span class="parameter">b</span>
+
+
+
+        </li>
+        <li><span class="parameter">t</span>
+
+
+
+        </li>
+        <li><span class="parameter">s</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:serialize"></a>
+    <strong>utils:serialize (object)</strong>
+    </dt>
+    <dd>
+    Recursive function to serialize a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:sort_pairs"></a>
+    <strong>utils:sort_pairs (tab, comp)</strong>
+    </dt>
+    <dd>
+    Pairs through a table sorted by a comparative function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">tab</span>
+
+
+
+        </li>
+        <li><span class="parameter">comp</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:itermatrix"></a>
+    <strong>utils:itermatrix (w, h)</strong>
+    </dt>
+    <dd>
+    Iterate through a x and y of a matrix with width w and height h.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">w</span>
+
+
+
+        </li>
+        <li><span class="parameter">h</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:split_file_path"></a>
+    <strong>utils:split_file_path (file_path)</strong>
+    </dt>
+    <dd>
+    Returns the path, filename and extension.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file_path</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "utils:map"></a>
+    <strong>utils:map (fun, tab)</strong>
+    </dt>
+    <dd>
+    Map a function to a table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fun</span>
+
+
+
+        </li>
+        <li><span class="parameter">tab</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2018-05-27 10:43:13 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

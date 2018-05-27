@@ -7,8 +7,6 @@ local world = require "src/world"
 local Cursor = Component:new()
 
 function Cursor:load()
-  self.x = 0
-  self.y = 0
   self.sprite = resource.get("sprite", "square")
 end
 
