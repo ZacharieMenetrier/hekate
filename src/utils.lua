@@ -1,5 +1,4 @@
---- A parser/renderer for Aseprite animations in LÖVE.
--- @classmod utils
+--- Some utilities functions.
 local utils = {}
 
 --- Read a file and return a string.
@@ -17,20 +16,6 @@ function utils.read_table(file_path)
   local str = "return {" .. love.filesystem.read(file_path) .. "}"
   local table = loadstring(str)()
   return table
-end
-
---- Write a string to a file.
-function utils.write_file(file_path, str)
-  file = io.open(file_path, "w")
-  file:write(str)
-  file:close()
-end
-
---! Append a string to a file.
-function utils.append_file(file_path, str)
-  file = io.open(file_path, "a")
-  file:write(str)
-  file:close()
 end
 
 --- Pack arguments into a table.

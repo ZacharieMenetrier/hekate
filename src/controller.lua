@@ -1,3 +1,6 @@
+--- The controller is a singleton that is used to make call on components.
+local controller = {}
+
 local utils = require "src/utils"
 local resource = require "src/resource"
 local world = require "src/world"
@@ -6,7 +9,7 @@ local world = require "src/world"
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
---! @brief Enclose a call with its argument, ready to take a component.
+-- Enclose a call with its argument, ready to take a component.
 local do_call = function(call, ...)
   local params = utils.pack(...)
   return function(component)
@@ -39,33 +42,30 @@ end
 --public variables--------------------------------------------------------------
 --------------------------------------------------------------------------------
 
--- Call a function on aa cluster of components.
-local call_cluster = function(call, cluster, ...)
+--- Call a function on a cluster of components.
+function controller.call_cluster(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
   assert(type(call) == "string", "The call is not a string")
   return map(do_call(call, ...), cluster)
 end
 
--- Return the fisrt non-null response from a cluster of components.
-local call_any = function(call, cluster, ...)
+--- Return the fisrt non-null response from a cluster of components.
+function controller.call_any(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
   assert(type(call) == "string", "The call is not a string")
   return any(do_call(call, ...), cluster)
 end
 
-local call_world = function(call, ...)
-  return call_cluster(call, world.all(), ...)
+--- Call a function on all the world's components.
+function controller.call_world(call, ...)
+  return controller.call_cluster(call, world.all(), ...)
 end
 
-local call_world_any = function(call, ...)
-  return call_any(call, world.all(), ...)
+--- Return the fisrt non-null response from the components of the world.
+function controller.call_world_any(call, ...)
+  return controller.call_any(call, world.all(), ...)
 end
 
---------------------------------------------------------------------------------
--- The singleton interface that could be accessed from everywhere
-return {call_cluster = call_cluster,
-        call_any = call_any,
-        call_world = call_world,
-        call_world_any = call_world_any}
+return controller
