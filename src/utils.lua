@@ -14,8 +14,7 @@ function utils.read_table(file_path)
   local file_exists = love.filesystem.getInfo(file_path)
   assert(file_exists, "No file found at: " .. file_path)
   local str = "return {" .. love.filesystem.read(file_path) .. "}"
-  local table = loadstring(str)()
-  return table
+  return loadstring(str)()
 end
 
 --- Pack arguments into a table.
@@ -74,6 +73,7 @@ end
 
 --- Returns the path, filename and extension.
 function utils.split_file_path(file_path)
+  assert(file_path, "No file path specified")
   local p, f, e = string.match(file_path, "(.-)([^/]-([^/%.]+))$")
 	return p, string.gsub(f, "%..*", ""), e
 end

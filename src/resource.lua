@@ -12,50 +12,56 @@ local resource = {}
 --- Stock the preloaded resources.
 local loaded = {}
 
---- Short function to load a snippet with its file path.
+--- Short function to load a snippet.
 local load_snippet = function(file_path)
-  return require(string.gsub(file_path, "%..*", ""))
+  local snippet = require(string.gsub(file_path, "%..*", ""))
+  return function() return snippet end
+end
+
+--- Short function to load a sprite.
+local load_sprite = function(file_path)
+  local sprite = love.graphics.newImage(file_path)
+  return function() return sprite end
 end
 
 --- Short function to load a font.
-local load_font = function()
-  return function(file_path) return love.graphics.newFont(file_path, 16) end
+local load_font = function(file_path)
+  local font = love.graphics.newFont(file_path, 16)
+  return function() return font end
 end
 
 --- Short function to load a lua-like table.
-local load_table = function()
-  return function(file_path) return utils.read_table(file_path) end
+local load_table = function(file_path)
+  return function() return utils.read_table(file_path) end
 end
 
 --- Short function to load an animation.
-local load_animation = function()
-  return function (file_path)
+local load_animation = function(file_path)
+  return function ()
     local path, file_name, extension = utils.split_file_path(file_path)
     if extension == "json" then return end
     local json = path .. "/" .. file_name .. ".json"
     local image = love.graphics.newImage(file_path)
-    return function()
-      return peachy.new(json, image)
-    end
+    return peachy.new(json, image)
   end
 end
 
---- Use to load a specific type of resource folder.
--- @param type: string: type of resources asked
+--- Use to load a specific category of resource folder.
+-- @param category: string: category of resources asked
 -- @param function: function used to load resource into a table
 -- @return table: key = name, value = Image
-local load_type = function(type, load)
-  local file_names = love.filesystem.getDirectoryItems("resource/" .. type)
-  local resources_type = {}
+local load_category = function(category, load)
+  local file_names = love.filesystem.getDirectoryItems("resource/" .. category)
+  local resources_category = {}
   for _, file_name in ipairs(file_names) do
-    local file_path = "resource/" .. type .. "/" .. file_name
+    local file_path = "resource/" .. category .. "/" .. file_name
     local name = string.gsub(file_name, "%..*", "")
     local resource = load(file_path)
     if resource then
-      resources_type[name] = function() return resource end
+      resources_category[name] = resource
     end
   end
-  return resources_type
+  return resources_category
 end
 
 --------------------------------------------------------------------------------
@@ -67,32 +73,33 @@ function resource.load()
   -- Set the filter to nearest for pixelish effect.
   love.graphics.setDefaultFilter("nearest", "nearest")
   -- Load the sprites.
-  loaded.sprite = load_type("sprite", love.graphics.newImage)
+  loaded.sprite = load_category("sprite", load_sprite)
   -- Load the components.
-  loaded.component = load_type("component", load_snippet)
+  loaded.component = load_category("component", load_snippet)
   -- Load the abilities.
-  loaded.ability = load_type("ability", load_snippet)
+  loaded.ability = load_category("ability", load_snippet)
   -- Load the fonts.
-  loaded.font = load_type("font", load_font())
+  loaded.font = load_category("font", load_font)
   -- Load the worlds.
-  loaded.world = load_type("world", load_table())
+  loaded.world = load_category("world", load_table)
   -- Load the tilemaps.
-  loaded.tilemap = load_type("tilemap", load_table())
+  loaded.tilemap = load_category("tilemap", load_table)
   -- Load the animations.
-  loaded.animation = load_type("animation", load_animation())
+  loaded.animation = load_category("animation", load_animation)
 end
 
 --- Return a specific resource.
--- @param type: string: Type of resources asked
+-- @param category: string: Category of resources asked
 -- @param name: string: Name of the resource
 -- @return table: key = name, value = resource
-function resource.get(type, name)
-  assert(type ~= nil, "No type of resource specified")
+function resource.get(category, name)
+  assert(category ~= nil, "No category of resource specified")
   assert(name ~= nil, "No name of resource specified")
-  local resources_type = loaded[type]
-  assert(resources_type ~= nil, "No resource of type: "  .. type)
-  local result = resources_type[name]
-  assert(result ~= nil, "No resource: " .. type .. "/" .. name)
+  local resources_category = loaded[category]
+  assert(resources_category ~= nil, "No resource of category: "  .. category)
+  local result = resources_category[name]
+  assert(result ~= nil, "No resource: " .. category .. "/" .. name)
+  print(category, name, result)
   return result()
 end
 

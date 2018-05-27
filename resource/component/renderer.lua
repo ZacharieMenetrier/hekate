@@ -9,7 +9,7 @@ local world = require "src/world"
 local Renderer = Component:new()
 
 function Renderer:load()
-  self.animation = resource.get("animation", "test")()
+  self.animation = resource.get("animation", "test")
   self.animation:setTag("Tag")
   self.animation:play()
   local position = world.get(self.__entity, "position")
