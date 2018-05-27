@@ -9,6 +9,9 @@ local world = require "src/world"
 local Renderer = Component:new()
 
 function Renderer:load()
+  self.animation = resource.get("animation", "test")()
+  self.animation:setTag("Tag")
+  self.animation:play()
   local position = world.get(self.__entity, "position")
   self.x = position.x * graphics.tile_size
   self.y = position.y * graphics.tile_size
@@ -16,6 +19,7 @@ end
 
 function Renderer:update(dt)
   local position = world.get(self.__entity, "position")
+  self.animation:update(dt)
   local x = position.x * graphics.tile_size
   local y = position.y * graphics.tile_size
   self.x = utils.lerp(self.x, x, dt, self.speed)
@@ -23,12 +27,10 @@ function Renderer:update(dt)
 end
 
 function Renderer:draw_actor()
-  local sprite = resource.get("sprite", self.sprite)
-  love.graphics.draw(sprite, self.x, self.y - 32)
+  self.animation:draw(self.x, self.y - 32)
 end
 
 function Renderer:get_draw_order()
-  local sprite = resource.get("sprite", self.sprite)
   local position = world.get(self.__entity, "position")
   return position.y
 end
