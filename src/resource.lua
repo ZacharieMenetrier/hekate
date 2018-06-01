@@ -99,7 +99,6 @@ function resource.get(category, name)
   assert(resources_category ~= nil, "No resource of category: "  .. category)
   local result = resources_category[name]
   assert(result ~= nil, "No resource: " .. category .. "/" .. name)
-  print(category, name, result)
   return result()
 end
 

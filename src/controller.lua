@@ -1,4 +1,4 @@
---- The controller is a singleton that is used to make call on components.
+--- The controller is a module that is used to make call on components.
 local controller = {}
 
 local utils = require "src/utils"
@@ -43,27 +43,35 @@ end
 --------------------------------------------------------------------------------
 
 --- Call a function on a cluster of components.
+-- @param call: A string that specify the command to execute.
+-- @param cluster: The cluster of components.
 function controller.call_cluster(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
+  assert(type(cluster) == "table", "The cluster is not a table")
   assert(type(call) == "string", "The call is not a string")
   return map(do_call(call, ...), cluster)
 end
 
 --- Return the fisrt non-null response from a cluster of components.
+-- @param call: A string that specify the command to execute.
+-- @param cluster: The cluster of components.
 function controller.call_any(call, cluster, ...)
   assert(call, "No call specified")
   assert(cluster, "No cluster specified")
+  assert(type(cluster) == "table", "The cluster is not a table")
   assert(type(call) == "string", "The call is not a string")
   return any(do_call(call, ...), cluster)
 end
 
 --- Call a function on all the world's components.
+-- @param call: A string that specify the command to execute.
 function controller.call_world(call, ...)
   return controller.call_cluster(call, world.all(), ...)
 end
 
 --- Return the fisrt non-null response from the components of the world.
+-- @param call: A string that specify the command to execute.
 function controller.call_world_any(call, ...)
   return controller.call_any(call, world.all(), ...)
 end

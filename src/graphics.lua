@@ -1,19 +1,24 @@
--- public
-local tile_size = 32
--- public
-local quad_size = 16
+--- A module responsible of holding some graphical facilities.
+local graphics = {}
+
+--- The number of pixels in a row of a tile.
+graphics.tile_size = 32
+--- The number of pixels in a row of a quad of a tile.
+graphics.quad_size = 16
 
 --------------------------------------------------------------------------------
 --private variables-------------------------------------------------------------
 --------------------------------------------------------------------------------
 
+-- The number of quads in a row of a tileset.
 local quads_per_tileset = 16
+-- The quads of the tileset.
 local tileset_quads = {}
 
 -- Calculate the quads for the tileset.
 do
   local tileset_size = 256
-  local qs = quad_size
+  local qs = graphics.quad_size
   local ts = tileset_size
   local nq = love.graphics.newQuad
   for y = 0, quads_per_tileset - 1 do
@@ -34,12 +39,16 @@ tile_variation[5] = 0
 tile_variation[6] = 0.01
 tile_variation[7] = 0.05
 
---------------------------------------------------------------------------------
---public variables--------------------------------------------------------------
---------------------------------------------------------------------------------
 
---! @brief Return a tileset quad given the tile and its neighbour.
-local get_tileset_quad = function(tile, x, y, h, v, d, seed)
+--- Return a tileset quad given the tile and its neighbour.
+-- @param tile: The number representing the kind of tile to evaluate.
+-- @param x: The x position of the tile.
+-- @param y: The y position of the tile.
+-- @param h: Is there an horizontal neighbour ?
+-- @param v: Is there a vertical neighbour ?
+-- @param d: Is there a diagonal neighbour ?
+-- @param seed: The seed to randomize the tile.
+function graphics.get_tileset_quad(tile, x, y, h, v, d, seed)
   love.math.setRandomSeed(seed)
   y = y + tile * 2
   local shift = 0
@@ -58,18 +67,21 @@ local get_tileset_quad = function(tile, x, y, h, v, d, seed)
   return tileset_quads[x + shift * 2 + y * quads_per_tileset]
 end
 
-local pixel_to_tile = function(x, y, scale)
+--- Return the tile position given a pixel position.
+-- @param x: The x in pixel.
+-- @param y: The y in pixel.
+-- @param scale: The scale of the camera.
+function graphics.pixel_to_tile(x, y, scale)
+  local tile_size = graphics.tile_size
   return math.floor(x / scale / tile_size), math.floor(y / scale / tile_size)
 end
 
-local tile_to_pixel = function(x, y)
+--- Return the pixel position given a tile position.
+-- @param x: The x in tile.
+-- @param y: The y in tile.
+function graphics.tile_to_pixel(x, y)
+  local tile_size = graphics.tile_size
   return math.floor(x * tile_size), math.floor(y * tile_size)
 end
 
---------------------------------------------------------------------------------
--- The singleton interface that could be accessed from everywhere.
-return {tile_size = tile_size,
-        quad_size = quad_size,
-        tile_to_pixel = tile_to_pixel,
-        pixel_to_tile = pixel_to_tile,
-        get_tileset_quad = get_tileset_quad}
+return graphics
