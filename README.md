@@ -3,7 +3,7 @@
 
 ## Description
 
-Our goal is to create a modular framework for a tactical-RPG game. This framework will be used in parallel for the creation of a small indie game. All the programming assets used for this framework will be open-source and under the GNU GPL licence.
+Our goal is to create a modular framework for a tactical-RPG game. This framework will be used in parallel for the creation of a small indie game. All the programming assets used for this framework will be open-source and under the very permissive MIT license.
 
 Please see our [wiki](https://github.com/ChienBleu/hekate/wiki) for more information.
 
