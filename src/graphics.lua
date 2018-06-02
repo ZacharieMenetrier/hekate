@@ -6,10 +6,6 @@ graphics.tile_size = 32
 --- The number of pixels in a row of a quad of a tile.
 graphics.quad_size = 16
 
---------------------------------------------------------------------------------
---private variables-------------------------------------------------------------
---------------------------------------------------------------------------------
-
 -- The number of quads in a row of a tileset.
 local quads_per_tileset = 16
 -- The quads of the tileset.

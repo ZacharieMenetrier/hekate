@@ -5,10 +5,6 @@ local utils = require "src/utils"
 local resource = require "src/resource"
 local world = require "src/world"
 
---------------------------------------------------------------------------------
---private variables-------------------------------------------------------------
---------------------------------------------------------------------------------
-
 -- Enclose a call with its argument, ready to take a component.
 local do_call = function(call, ...)
   local params = utils.pack(...)
@@ -37,10 +33,6 @@ local map = function(fun, cluster)
   end
   return results
 end
-
---------------------------------------------------------------------------------
---public variables--------------------------------------------------------------
---------------------------------------------------------------------------------
 
 --- Call a function on a cluster of components.
 -- @param call: A string that specify the command to execute.

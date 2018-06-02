@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Hekate documentation</title>
+    <link rel="stylesheet" href="../ldoc_pale.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Hekate</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lib.json.html">lib.json</a></li>
+  <li><a href="../modules/src.controller.html">src.controller</a></li>
+  <li><a href="../modules/src.graphics.html">src.graphics</a></li>
+  <li><a href="../modules/src.resource.html">src.resource</a></li>
+  <li><a href="../modules/src.utils.html">src.utils</a></li>
+  <li><strong>src.world</strong></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/peachy.html">peachy</a></li>
+</ul>
+<h2>Manual</h2>
+<ul class="nowrap">
+  <li><a href="../manual/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>src.world</code></h1>
+<p>A module that is used to keep track of the world's components.</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#select">select (filter:)</a></td>
+	<td class="summary">Return all the components that match the filter.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#all">all ()</a></td>
+	<td class="summary">Return all the components in the world.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#add">add (component:)</a></td>
+	<td class="summary">Add a new component to the world.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#delete">delete (entity:, component:)</a></td>
+	<td class="summary">Delete a component.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get">get (entity:, component:)</a></td>
+	<td class="summary">Return the component specified by its name and its entity.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#get_by_key">get_by_key (key:)</a></td>
+	<td class="summary">Return the component specified by its key.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exists">exists (entity:, component:)</a></td>
+	<td class="summary">Return true if the component specified by its name and its entity exists.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#load">load (world_name:)</a></td>
+	<td class="summary">Use to set the world to a specific folder.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#serialize">serialize (cluster:)</a></td>
+	<td class="summary">Serialize all the components into the world file.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "select"></a>
+    <strong>select (filter:)</strong>
+    </dt>
+    <dd>
+    Return all the components that match the filter.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">filter:</span>
+         The filter to select the components.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "all"></a>
+    <strong>all ()</strong>
+    </dt>
+    <dd>
+    Return all the components in the world.
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "add"></a>
+    <strong>add (component:)</strong>
+    </dt>
+    <dd>
+    Add a new component to the world.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">component:</span>
+         The component to add.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "delete"></a>
+    <strong>delete (entity:, component:)</strong>
+    </dt>
+    <dd>
+    Delete a component.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">entity:</span>
+         The entity of the component.
+        </li>
+        <li><span class="parameter">component:</span>
+         The name of the component.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get"></a>
+    <strong>get (entity:, component:)</strong>
+    </dt>
+    <dd>
+    Return the component specified by its name and its entity.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">entity:</span>
+         The entity of the component.
+        </li>
+        <li><span class="parameter">component:</span>
+         The name of the component.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "get_by_key"></a>
+    <strong>get_by_key (key:)</strong>
+    </dt>
+    <dd>
+    Return the component specified by its key.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key:</span>
+         the key of the component (e.g. : "bob__position")
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "exists"></a>
+    <strong>exists (entity:, component:)</strong>
+    </dt>
+    <dd>
+    Return true if the component specified by its name and its entity exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">entity:</span>
+         The entity of the component.
+        </li>
+        <li><span class="parameter">component:</span>
+         The name of the component.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "load"></a>
+    <strong>load (world_name:)</strong>
+    </dt>
+    <dd>
+    Use to set the world to a specific folder.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">world_name:</span>
+         The name of the world to load.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "serialize"></a>
+    <strong>serialize (cluster:)</strong>
+    </dt>
+    <dd>
+    Serialize all the components into the world file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cluster:</span>
+         The components to serialize.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2018-06-02 09:10:41 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

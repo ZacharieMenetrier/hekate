@@ -1,41 +1,37 @@
+--- A module that is used to retrieve the resources of the game.
+local resource = {}
+
 local graphics = require "src/graphics"
 local peachy = require "lib/peachy"
 local utils = require "src/utils"
 
---- A module that is used to retrieve the resources of the game.
-local resource = {}
-
---------------------------------------------------------------------------------
---private variables-------------------------------------------------------------
---------------------------------------------------------------------------------
-
---- Stock the preloaded resources.
+-- Stock the preloaded resources.
 local loaded = {}
 
---- Short function to load a snippet.
+-- Short function to load a snippet.
 local load_snippet = function(file_path)
   local snippet = require(string.gsub(file_path, "%..*", ""))
   return function() return snippet end
 end
 
---- Short function to load a sprite.
+-- Short function to load a sprite.
 local load_sprite = function(file_path)
   local sprite = love.graphics.newImage(file_path)
   return function() return sprite end
 end
 
---- Short function to load a font.
+-- Short function to load a font.
 local load_font = function(file_path)
   local font = love.graphics.newFont(file_path, 16)
   return function() return font end
 end
 
---- Short function to load a lua-like table.
+-- Short function to load a lua-like table.
 local load_table = function(file_path)
   return function() return utils.read_table(file_path) end
 end
 
---- Short function to load an animation.
+-- Short function to load an animation.
 local load_animation = function(file_path)
   return function ()
     local path, file_name, extension = utils.split_file_path(file_path)
@@ -48,7 +44,7 @@ end
 
 --- Use to load a specific category of resource folder.
 -- @param category: string: category of resources asked
--- @param function: function used to load resource into a table
+-- @param load: function used to load resource into a table
 -- @return table: key = name, value = Image
 local load_category = function(category, load)
   local file_names = love.filesystem.getDirectoryItems("resource/" .. category)
@@ -63,10 +59,6 @@ local load_category = function(category, load)
   end
   return resources_category
 end
-
---------------------------------------------------------------------------------
---public variables--------------------------------------------------------------
---------------------------------------------------------------------------------
 
 --- Automatically load all the resources in the resource folder.
 function resource.load()

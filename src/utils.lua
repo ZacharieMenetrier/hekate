@@ -1,15 +1,8 @@
 --- Some utilities functions.
 local utils = {}
 
---- Read a file and return a string.
-function utils.read_file(file_path)
-  file = io.input(file_path, "r")
-  str = file:read("*all")
-  file:close()
-  return str
-end
-
 --- Read a lua-like file and return its table.
+-- @param file_path: The path of the file to read.
 function utils.read_table(file_path)
   local file_exists = love.filesystem.getInfo(file_path)
   assert(file_exists, "No file found at: " .. file_path)
@@ -23,11 +16,16 @@ function utils.pack(...)
 end
 
 --- Get the lerp from a to b with a delta time t and a speed s.
+-- @param a: The a to go from.
+-- @param b: The b to go to.
+-- @param t: The time elapsed since last update.
+-- @param s: The speed of the movement.
 function utils.lerp(a, b, t, s)
   return a - (a - b) * t * s
 end
 
 --- Recursive function to serialize a table.
+-- @param object: The object to serialize.
 utils.serialize = function(object)
   value_type = type(object)
   if value_type ~= "table" then
@@ -42,6 +40,8 @@ utils.serialize = function(object)
 end
 
 --- Pairs through a table sorted by a comparative function.
+-- @param tab: The table to sort and iterate.
+-- @param comp: A comparative function to use for sorting.
 function utils.sort_pairs(tab, comp)
   local sorted = {}
   for id, elem in pairs(tab) do table.insert(sorted, {id = id, elem = elem}) end
@@ -57,6 +57,8 @@ function utils.sort_pairs(tab, comp)
 end
 
 --- Iterate through a x and y of a matrix with width w and height h.
+-- @param w: The width of the matrix.
+-- @param h: The height of the matrix.
 function utils.itermatrix(w, h)
   local xi = -1
   local yi = 0
@@ -72,6 +74,7 @@ function utils.itermatrix(w, h)
 end
 
 --- Returns the path, filename and extension.
+-- @param file_path: The path of the file.
 function utils.split_file_path(file_path)
   assert(file_path, "No file path specified")
   local p, f, e = string.match(file_path, "(.-)([^/]-([^/%.]+))$")
@@ -79,6 +82,8 @@ function utils.split_file_path(file_path)
 end
 
 --- Map a function to a table.
+-- @param fun: The function to map.
+-- @param tab: The table to map a function to.
 function utils.map(fun, tab)
   assert(fun, "No function specified")
   assert(tab, "No table specified")
