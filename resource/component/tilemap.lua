@@ -5,11 +5,11 @@ local resource = require "src/resource"
 local world = require "src/world"
 local math = require "math"
 
---------------------------------------------------------------------------------
---private variables-------------------------------------------------------------
---------------------------------------------------------------------------------
+--- The tilemap of the world.
+-- @classmod tilemap
+local Tilemap = Component:new()
 
---! @brief Draw a quad of the tilemap.
+--- Draw a quad of the tilemap.
 local draw_quad = function(x, y, xq, yq, tile, tileset, tilemap, xpix, ypix, xi, yi)
   -- Get the horizontal neighbour.
   local h = tilemap:get_tile(x + xq, y) == tile
@@ -25,7 +25,7 @@ local draw_quad = function(x, y, xq, yq, tile, tileset, tilemap, xpix, ypix, xi,
   love.graphics.draw(tileset, quad, xpix, ypix)
 end
 
---! @brief Draw a tile of the tilemap.
+--- Draw a tile of the tilemap.
 local draw_tile = function(x, y, tile, tileset, tilemap)
   local xpix = x * graphics.tile_size
   local ypix = y * graphics.tile_size
@@ -38,16 +38,12 @@ local draw_tile = function(x, y, tile, tileset, tilemap)
   draw_quad(x, y, 1, 1, tile, tileset, tilemap, xpix + qs, ypix + qs, 1, 1)
 end
 
---------------------------------------------------------------------------------
---public variables--------------------------------------------------------------
---------------------------------------------------------------------------------
-
-local Tilemap = Component:new()
-
+--- Load the tilemap.
 function Tilemap:load()
   self.data = resource.get("tilemap", self.tilemap)
 end
 
+--- Draw the tilemap.
 function Tilemap:draw_tilemap()
   local camera = world.get("system", "camera")
   local tileset = resource.get("sprite", self.tileset)
@@ -58,10 +54,9 @@ function Tilemap:draw_tilemap()
   end
 end
 
-function Tilemap:get_save()
-  return self:get_partial_save("tileset", "tilemap")
-end
-
+--- Return the tile at x and y.
+-- @param x: The x position
+-- @param y: The y position
 function Tilemap:get_tile(x, y)
   if x < 0 then return 5 end
   if y < 0 then return 5 end

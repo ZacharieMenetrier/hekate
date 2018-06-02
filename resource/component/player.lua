@@ -1,10 +1,9 @@
 local Component = require "resource/component/component"
 local world = require "src/world"
 
---------------------------------------------------------------------------------
-
---! @brief This components marks entities that are controlled by the player.
---! It is responsible for order execution.
+--- This components marks entities that are controlled by the player.
+-- It is responsible for order execution.
+-- @classmod player
 local Player = Component:new()
 
 -- TODO Move this to interface and instead have the Player component call abilities

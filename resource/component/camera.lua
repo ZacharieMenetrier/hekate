@@ -6,11 +6,13 @@ local utils = require "src/utils"
 local world = require "src/world"
 local math = require "math"
 
---------------------------------------------------------------------------------
---private variables-------------------------------------------------------------
---------------------------------------------------------------------------------
+--- A camera that is used to translate and scale the graphics.
+-- Also in charge to redistribute the draw calls to the entities.
+-- @classmod camera
+local Camera = Component:new()
 
---! Call draw on every actor depending on its draw order.
+
+--- Call draw on every actor depending on its draw order.
 local draw_actors = function()
   -- Get the draw order of each component that has one.
   local orders = controller.call_world("get_draw_order")
@@ -24,32 +26,21 @@ local draw_actors = function()
   end
 end
 
-
---------------------------------------------------------------------------------
---public variables--------------------------------------------------------------
---------------------------------------------------------------------------------
-
---! A camera is in charge to redistribute the draw call to the entities.
-local Camera = Component:new()
-
---! Load the camera
+--- Load the camera
 function Camera:load()
   self.grid = self:create_grid()
 end
 
---! Return the x and y position of the mouse in the world pixel-coordinate.
-function Camera:world_mouse()
-  return self.x + love.mouse.getX(), self.y + love.mouse.getY()
-end
-
---! Catch the mouse to move the camera.
+--- Catch the mouse to move the camera.
+-- @param x: The x of the mouse in the window.
+-- @param y: The y of the mouse in the window.
 function Camera:mousepressed(x, y, button)
   if button ~= 2 then return end
   self.lockx = x
   self.locky = y
 end
 
---! Update the camera.
+--- Update the camera.
 function Camera:update(dt)
   -- If the "g" key is pressed then draw the grid.
   if love.keyboard.isDown("g") then
@@ -68,12 +59,17 @@ function Camera:update(dt)
   self.locky = love.mouse.getY()
 end
 
---! If the screen is resized then recreate the grid.
+--- If the screen is resized then recreate the grid.
 function Camera:resize()
   self.grid = self:create_grid()
 end
 
---! Return a spritebatch with the grid of the screen size.
+--- Return the x and y position of the mouse in the world pixel-coordinate.
+function Camera:mouse_to_world_pixel()
+  return self.x + love.mouse.getX(), self.y + love.mouse.getY()
+end
+
+--- Return a spritebatch with the grid of the screen size.
 function Camera:create_grid()
   -- The sprite of the grid.
   local sprite = resource.get("sprite", "grid")
@@ -94,7 +90,7 @@ function Camera:create_grid()
   return grid
 end
 
---! Draw the grid of the camera.
+--- Draw the grid of the camera.
 function Camera:draw_grid()
   -- Beginning of the grid draw.
   -- Some self-explanatory shortcuts.
@@ -109,7 +105,7 @@ function Camera:draw_grid()
   love.graphics.setColor(1, 1, 1, 1)
 end
 
---! The draw of the camera will redistribute the draw for the actors.
+--- The draw of the camera will redistribute the draw for the actors.
 function Camera:draw()
   love.graphics.scale(self.scale, self.scale)
   -- Translate the world's graphics.
@@ -126,7 +122,7 @@ function Camera:draw()
   draw_actors()
 end
 
---! Return an iterator of the tile visibles in the world.
+--- Return an iterator of the tile visibles in the world.
 function Camera:tiles_visibles()
   local tiles = {}
   -- Some self-explanatory shortcuts.
@@ -151,7 +147,7 @@ function Camera:tiles_visibles()
   end
 end
 
---! Return the save of the camera.
+--- Return the save of the camera.
 function Camera:get_save()
   return self:get_partial_save("x", "y")
 end

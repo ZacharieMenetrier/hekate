@@ -2,7 +2,7 @@ local Component = require "resource/component/component"
 
 --------------------------------------------------------------------------------
 
---! @brief Vital stats for an entity (HP, etc.)
+--- Vital stats for an entity (HP, etc.)
 local Vitals = Component:new()
 
 function Vitals:heal(k)

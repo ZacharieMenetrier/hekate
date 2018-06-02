@@ -4,8 +4,6 @@ local resource = require "src/resource"
 local utils = require "src/utils"
 local world = require "src/world"
 
---------------------------------------------------------------------------------
-
 local Renderer = Component:new()
 
 function Renderer:load()

@@ -2,16 +2,15 @@ local Component = require "resource/component/component"
 local world = require "src/world"
 local graphics = require "src/graphics"
 
---------------------------------------------------------------------------------
-
---! @brief A system component to process player input
+--- A system component to process player input
 -- Remember, this component is only here to interpret input into orders,
 -- send those to the Player component for execution
+-- @classmod interface
 local Interface = Component:new()
 
 
 
---! @brief Selecting an entity with a left click of the mouse
+--- Selecting an entity with a left click of the mouse
 function Interface:tile_pressed(x,y, button)
 
   filter_pos = function(c) if (c.__name == "position" and c.x == x and c.y == y) then return true end end
@@ -36,7 +35,7 @@ end
 
 
 
---! @brief UI drawing function to be called in the main loop. Main wrapper.
+--- UI drawing function to be called in the main loop. Main wrapper.
 function Interface:draw_ui()
 
   -- Infos about selected
