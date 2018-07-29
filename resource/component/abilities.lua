@@ -20,7 +20,15 @@ function Abilities:call_ability(ability_name,parameters)
 
   -- Remark : ability calls must always include the caster (self)
   if (ability_to_call == nil) then print("Ability not learned.")
-  else ability_to_call(self,unpack(parameters)) end
+  else
+    ability_to_call(self,unpack(parameters))
+
+    -- Print the ability and its parameters
+    -- TODO print that in the interface of the game, with the caster and the parameters
+    print(self.__entity.." used "..ability_name.." with the parameters : ")
+    print("\t"..unpack(parameters))
+  end
+
 end
 
 return Abilities
