@@ -10,6 +10,7 @@ function love.load(arg)
   world.load("test")
   controller.call_world("load")
   love.graphics.setNewFont("resource/font/PixelHekate.ttf", 16)
+  love.mouse.setCursor(love.mouse.newCursor("resource/sprite/cursor.png", 0, 0))
 end
 
 --------------------------------------------------------------------------------
