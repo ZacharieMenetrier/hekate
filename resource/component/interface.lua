@@ -24,10 +24,9 @@ function Interface:tile_pressed(x,y, button)
     if button == 2 then self.selected_target = nil end
   end
 
+  -- Left click for a select, right click for a target
   for _,c in pairs(position_on_tile) do
-    -- Left click for a select
     if button == 1 then self.selected_entity = c.__entity end
-    -- Right click for a target
     if button == 2 then self.selected_target = c.__entity end
   end
 

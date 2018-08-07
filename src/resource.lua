@@ -66,6 +66,8 @@ function resource.load()
   love.graphics.setDefaultFilter("nearest", "nearest")
   -- Load the sprites.
   loaded.sprite = load_category("sprite", load_sprite)
+  -- Load the interface
+  loaded.interface = load_category("interface", load_sprite)
   -- Load the components.
   loaded.component = load_category("component", load_snippet)
   -- Load the abilities.
