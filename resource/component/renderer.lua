@@ -7,9 +7,12 @@ local world = require "src/world"
 local Renderer = Component:new()
 
 function Renderer:load()
-  self.animation = resource.get("animation", "test")
-  self.animation:setTag("Tag")
-  self.animation:play()
+  -- Temporary hack
+  if self.__entity == "tom" then
+    self.animation = resource.get("animation", "test")
+    self.animation:setTag("Tag")
+    self.animation:play()
+  end
   local position = world.get(self.__entity, "position")
   self.x = position.x * graphics.tile_size
   self.y = position.y * graphics.tile_size
@@ -17,7 +20,7 @@ end
 
 function Renderer:update(dt)
   local position = world.get(self.__entity, "position")
-  self.animation:update(dt)
+  if self.animation ~= nil then self.animation:update(dt) end
   local x = position.x * graphics.tile_size
   local y = position.y * graphics.tile_size
   self.x = utils.lerp(self.x, x, dt, self.speed)
@@ -25,7 +28,15 @@ function Renderer:update(dt)
 end
 
 function Renderer:draw_actor()
-  self.animation:draw(self.x, self.y - 32)
+  -- Draw the animation if you have one
+  if self.animation ~= nil then
+    self.animation:draw(self.x, self.y - 32)
+  -- Else just draw your static sprite
+  else
+    local position = world.get(self.__entity, "position")
+    local x, y = graphics.tile_to_pixel(position.x, position.y)
+    love.graphics.draw(resource.get("sprite", self.sprite), x, y)
+  end
 end
 
 function Renderer:get_draw_order()
